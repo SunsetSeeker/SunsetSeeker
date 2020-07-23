@@ -16,14 +16,14 @@ export default class AddSpot extends Component {
   }; 
 
   handleSubmit = event => {
-    alert(`A spot was submitted: ${this.state.title}.`);
     event.preventDefault(); 
     axios
-    .post('/', {
+    .post('/server/list', {
       title: this.state.title, 
       description: this.state.description
     })
-    .then(() => {
+    .then((res) => {
+      console.log(res)
       this.setState({
         title:"", 
         description:""
