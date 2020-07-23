@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Sunset = require('../models/Sunset');
 
-router.post('/', (req, res) => {
+router.post('/list', (req, res) => {
   const title = req.body.title;
   const description = req.body.description;
   // const latitude= req.body.latitude; 
@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
 
 
 //get /api/sunsets
-router.get('/', (req,res) => {
+router.get('/list', (req,res) => {
   Sunset.find()
   .then(sunsets => {
     res.status(200).json(sunsets); 
