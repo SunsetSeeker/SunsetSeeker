@@ -19,12 +19,13 @@ router.post('/list', (req, res) => {
   Sunset.create({
     title,
     description,
+    owner,
     // latitude, 
     // longitude, 
     // rating: 0, 
     // img,    
     // category, 
-    // comment, 
+     comments, 
     // user: user
   })
     .then(sunset => {
