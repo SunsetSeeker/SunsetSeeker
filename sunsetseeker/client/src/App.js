@@ -1,5 +1,4 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
 import { Route, Redirect } from 'react-router-dom';
 //import SpotList from './components/SpotList/SpotList';
@@ -7,7 +6,10 @@ import Navbar from './components/Navbar/Navbar';
 import Signup from './components/Auth/Signup';
 import Login from './components/Auth/Login';
 import Home from './components/Home/Home';
-//import Login from './components/Auth/Login';
+import SpotList from './components/SpotList/SpotList'; 
+import AddSpot from './components/AddSpot/AddSpot'; 
+import SpotDetails from './components/SpotDetails/SpotDetails'; 
+import EditSpot from './components/EditSpot/EditSpot';
 
 
 // function App() {
@@ -84,6 +86,22 @@ class App extends React.Component {
           path='/login'
           render={props => <Login setUser={this.setUser} {...props} />}
         />
+        
+        <Route 
+        exact path="/list"
+        component={SpotList}
+        />
+
+        <Route
+        exact path="/addSpot"
+        component={AddSpot}
+        />
+
+        <Route 
+        exact path="/editSpot"
+        component={EditSpot}
+        />
+      
       </div>
     );
   }
