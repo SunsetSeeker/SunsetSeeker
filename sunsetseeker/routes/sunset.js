@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const uploader = require('../cloudinary'); 
 const Sunset = require('../models/Sunset');
 
 router.post('/list', (req, res) => {
