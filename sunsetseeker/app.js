@@ -24,6 +24,30 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 
 const app = express();
 
+
+
+//Session and passport for authentication
+const session = require('express-session');
+const passport = require('passport');
+
+require('./configs/passport');
+
+//Express session configuration
+const MongoStore = require('connect-mongo')(session);
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
+
 // Middleware Setup
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -51,8 +75,12 @@ app.locals.title = 'Express - Generated with IronGenerator';
 
 app.use('/', require('./routes/sunset')); 
 
+app.use('/api/auth', require('./routes/auth'));
+
+
 // const index = require('./routes/index');
 // app.use('/', index);
+
 
 
 module.exports = app;
