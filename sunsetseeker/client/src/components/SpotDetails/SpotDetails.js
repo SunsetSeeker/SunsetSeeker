@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Button } from 'react-bootstrap';
-import EditSpot from '../EditSpot/EditSpot';
+//import EditSpot from '../EditSpot/EditSpot';
 import AddSpot from '../AddSpot/AddSpot';
 import SpotList from '../SpotList/SpotList';
 
@@ -102,21 +102,14 @@ componentDidMount = () => {
 
         <Button onClick={this.toggleEditForm}> Show Edit Form </Button>
         <Button onClick={this.toggleTaskForm}> Show Task Form </Button>
-        {this.state.editForm && (
+        /* {this.state.editForm && (
           <EditProject
             {...this.state}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
           />
-        )}
-        {this.state.taskForm && (
-          <AddTask
-            spotId={this.state.spot._id}
-            getData={this.getData}
-            hideForm={() => this.setState({ taskForm: false })}
-          />
-        )}
-        <TaskList tasks={this.state.spot.tasks} />
+        )} */
+        
       </div>
     );
   }

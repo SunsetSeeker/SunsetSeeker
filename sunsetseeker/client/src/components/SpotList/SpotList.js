@@ -16,7 +16,7 @@ export default class SpotList extends Component {
       getData = () => {
 
         axios
-          .get('server/list/spotlist')
+          .get('server/list')
           .then(response => {
               console.log("banana",response)
             this.setState({

@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const uploader = require('../configs/cloudinary'); 
+const uploader = require('../configs/cloudinary');
 const Sunset = require('../models/Sunset');
 
-router.post('/list', (req, res) => {
+router.post('/', (req, res) => {
   const title = req.body.title;
   const description = req.body.description;
+
   // const latitude= req.body.latitude; 
   // const longitude=req.body.longitude; 
   // const rating = [];
@@ -14,18 +15,17 @@ router.post('/list', (req, res) => {
   // const img=req.body.file.secure_url; 
   // const comment=??
   // const category=??
-  // const user = req.user._id;
+  //const user = req.user._id;
 
   Sunset.create({
     title,
     description,
-    owner,
+    
     // latitude, 
     // longitude, 
     // rating: 0, 
     // img,    
     // category, 
-     comments, 
     // user: user
   })
     .then(sunset => {
@@ -38,7 +38,7 @@ router.post('/list', (req, res) => {
 
 
 //get /api/sunsets
-router.get('/list', (req,res) => {
+router.get('/', (req,res) => {
   Sunset.find()
   .then(sunsets => {
     res.status(200).json(sunsets); 
