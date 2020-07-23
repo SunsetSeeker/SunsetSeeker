@@ -3,6 +3,8 @@ import './App.css';
 import { Route } from 'react-router-dom'; 
 import SpotList from './components/SpotList/SpotList'; 
 import AddSpot from './components/AddSpot/AddSpot'; 
+import SpotDetails from './components/SpotDetails/SpotDetails'; 
+import EditSpot from './components/EditSpot/EditSpot'; 
 
 
 class App extends Component {
@@ -24,9 +26,14 @@ class App extends Component {
         component={SpotList}
         />
 
-        <Route 
+        <Route
         exact path="/addSpot"
         component={AddSpot}
+        />
+
+        <Route 
+        exact path="/editSpot"
+        component={EditSpot}
         />
 
       </div>

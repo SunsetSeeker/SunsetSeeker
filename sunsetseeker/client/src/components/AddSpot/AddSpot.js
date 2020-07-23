@@ -37,6 +37,8 @@ export default class AddSpot extends Component {
 
   render(){
     return(
+      <div>
+      <h2>Add a new sunset location:</h2>
       <form onSubmit={this.handleSubmit}>
         <label>Name of the place:</label> 
             <input 
@@ -54,8 +56,9 @@ export default class AddSpot extends Component {
             value={this.state.description}
             onChange={this.handleChange}
             />
-        <input type="submit" value="Submit"/>
+        <input type="submit" value="Add"/>
       </form>
+      </div>
     )
   }
 }
