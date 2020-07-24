@@ -1,59 +1,85 @@
 import React, {Component} from "react";
 import axios from "axios";
 // import { Button } from 'react-bootstrap';
-//import EditSpot from '../EditSpot/EditSpot';
+import EditSpot from '../EditSpot/EditSpot';
 import SpotList from '../SpotList/SpotList';
 import AddComment from '../AddComment/AddComment';
 import Rating from '../Rating/Rating';
-
+import { Link } from 'react-router-dom';
 
 export default class SpotDetails extends Component {
-
     state= {
         spot: null,
         title: "", 
         description: "",
         commentForm: false,
         rating: 0,
-          }; 
+        editForm: false,
+        }; 
 
-deleteProject = () => {
-    const id = this.props.match.params.spotId;
-    axios.delete(`/server/list/${id}`)
+    deleteProject = () => {
+      const id = this.props.match.params.spotId;
+      axios.delete(`/server/list/${id}`)
         .then(() => {
         this.props.history.push(`/list`);
         })
 
-    }              
+    }    
+    
+    toggleEditForm=()=> {
+      const id = this.props.match.params.spotId;
+      // console.log(id); 
+      this.setState({
+        editForm: !this.state.editForm
+      })
+    }; 
 
     handleChange = event => {
-        const { title, description } = event.target;
+        const { name, value } = event.target;
         this.setState({
-            [title] : title
+            [name] : value
         });
     };
-
-    handleClick = () => {
+handleClick = () => {
         this.setState({
           rating: this.state.rating + 1,
           
         });
       };
 
-    toggleCommentForm = () => {
+   toggleCommentForm = () => {
         this.setState({
             commentForm: !this.state.commentForm
         })
-    }
+  }
+   
+    handleSubmit = event => {
+      event.preventDefault(); 
+      const id=this.props.match.params.spotId; 
+      axios.put(`/server/list/${id}`, {
+        title: this.state.title, 
+        description: this.state. description
+      })
+      .then(response => {
+        this.setState({
+          title: response.data.title, 
+          description: response.data.description, 
+          editForm: false
+        })
+      })
+      .catch(err => {
+        console.log(err); 
+      })
+  
 
 
-      getData = () => {
+    getData = () => {
         const id = this.props.match.params.spotId;
-        console.log(id, " here ");
+        // console.log(id, " here ");
         axios
           .get(`/server/list/${id}`)
           .then(response => {
-            console.log(response.data);
+            // console.log(response.data);
             this.setState({
               title: response.data.title,
               description: response.data.description
@@ -68,9 +94,15 @@ deleteProject = () => {
           });
       };
 
-componentDidMount = () => {
-    this.getData();
+  componentDidMount = () => {
+      this.getData();
   };
+
+  exitEditing=()=> {
+      this.setState({
+      editForm: !this.state.editForm
+    })
+  }; 
 
   render() {
       console.log(this.state);
@@ -82,7 +114,8 @@ componentDidMount = () => {
     // if (user && user._id === owner) allowedToDelete = true;
     return (
       <div>
-       
+      <Link to ={`/list`}>Go back to full list</Link>
+     
         <h1>{this.state.title}</h1>
         <p>{this.state.description}</p>
 
@@ -119,8 +152,17 @@ componentDidMount = () => {
                 {this.state.rating} Stars
             </button>
         
+        {this.state.editForm && (
+          <div>
+          <EditSpot
+          {...this.state}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          />
+          <button onClick={this.exitEditing}>Exit editing</button>
+          </div>
+        )}
       </div>
     );
   }
-
 }

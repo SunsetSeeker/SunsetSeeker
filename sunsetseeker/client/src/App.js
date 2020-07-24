@@ -99,7 +99,7 @@ class App extends React.Component {
         />
 
         <Route 
-        exact path="/editSpot"
+        exact path="/editSpot/:spotId"
         component={EditSpot}
         />
 

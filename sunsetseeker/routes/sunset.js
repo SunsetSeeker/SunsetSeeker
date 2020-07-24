@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const uploader = require('../configs/cloudinary');
+const uploader = require('../configs/cloudinary.js');
 const Sunset = require('../models/Sunset');
 
 router.post('/', (req, res) => {
   const title = req.body.title;
+  const file = req.body.file; 
   const description = req.body.description;
   const img=req.body.file.secure_url; 
 
@@ -63,11 +64,11 @@ router.get('/:id', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  const { title, description } = req.body;
+  const { title, description, img } = req.body;
 
   Sunset.findByIdAndUpdate(
     req.params.id,
-    { title, description },
+    { title, description, img },
     // { new: true } ensures that we are getting the updated document in the .then callback
     { new: true }
   )
@@ -96,17 +97,14 @@ router.delete('/:id', (req, res) => {
 });
 
 // for image upload 
-// router.post("/upload", uploader.single("img"), (req, res, next) => {
-//   const img=req.body.file.secure_url; 
- 
-//   Movie.create({ title, description, imgPath, imgName })
-//     .then(movie => {
-//       res.redirect("/");
-//     })
-//     .catch(error => {
-//       console.log(error);
-//     });
-// });
+router.post("/upload", uploader.single("img"), (req, res, next) => {
+  // const img=req.body.file.secure_url; 
+  if(!req.file) {
+    next(new Error("No file uploaded")); 
+    return; 
+  }
+  res.json({secure_url: req.file.secure_url}); 
+});
 
 
 module.exports=router; 
