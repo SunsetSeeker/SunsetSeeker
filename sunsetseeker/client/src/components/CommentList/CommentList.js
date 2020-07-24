@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import AddSpot from '../AddSpot/AddSpot';
+import AddComment from '../AddComment/AddComment';
 
-export default class SpotList extends Component {
+export default class CommentList extends Component {
 
     state = {
-        sunsets: []
+        comments: []
       };
     
       componentDidMount = () => {
@@ -16,9 +16,9 @@ export default class SpotList extends Component {
       getData = () => {
 
         axios
-          .get('server/list')
+          .get(`/server/comment`)
           .then(response => {
-              console.log("banana",response)
+              console.log("testeTste",response)
             this.setState({
                 sunsets: response.data
             });
@@ -38,12 +38,10 @@ export default class SpotList extends Component {
                     <div key={sunset._id}>
                         <h3>
                             <Link to={`/spotdetails/${sunset._id}`} > {sunset.title}</Link>
-                            <span> <br/> <img src={sunset.img} style={{width:"100px"}}/></span>
                         </h3>
                     </div>
                 );
             })}
-            <button><Link to ={`/addSpot`}> Add a new Spot</Link></button>
         </div>
         );
     }

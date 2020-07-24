@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Component } from "react";
 import axios from 'axios'; 
+import FileInput from './FileInput'; 
+import { Link } from 'react-router-dom';
 
 import Pin from "./Pin";
 
@@ -15,7 +17,7 @@ export default class AddSpot extends Component {
   state={
     title:"", 
     description:"",
-
+    file:"", 
     viewport: {
       latitude: 52,
       longitude: 13,
@@ -50,9 +52,14 @@ export default class AddSpot extends Component {
         },
       });
     });
-  };
+  };   
 
-
+onDrop=(picture)=> {
+    this.setState({
+      file:this.state.file.concat(picture)
+    }); 
+  }   
+   
 
   handleChange = event => {
     const name=event.target.name; 
@@ -61,7 +68,21 @@ export default class AddSpot extends Component {
       [name]: value
     });
   }; 
+  handleFile = element => {
+    const uploadData=new FormData(); 
+    uploadData.append("img", element.target.files[0]); 
 
+    console.log("THIS IS THE"+element)
+    this.setState({
+      uploadOn:true 
+    }); 
+    axios
+    .post("/server/list/upload", uploadData)
+    .then(response =>{
+      this.setState({file:response.data})
+    })
+    .catch(err=> console.log(err))
+  };
 
 
   handleSubmit = event => {
@@ -71,17 +92,24 @@ export default class AddSpot extends Component {
     .post('/server/list', {
       title: this.state.title, 
       description: this.state.description,
-
+      file: this.state.file,
       latitude: this.state.marker.latitude,
       longitude: this.state.marker.longitude,
-
-    })
+      })
     .then((res) => {
       console.log(res.data);
       
       // this.props.getData();
       
-      this.props.history.push(`/spotdetails/${res.data._id}`); 
+      this.props.history.push(`/spotdetails/${res.data._id}`);           
+//     })
+//     .then((res) => {
+//       console.log(res)
+//       this.setState({
+//         title:" ", 
+//         description:" ", 
+//         file:" ", 
+//       }); 
     })
     .catch(err => {
       console.log(err); 
@@ -129,8 +157,12 @@ export default class AddSpot extends Component {
     console.log(viewport, marker)
     return(
       <div>
+        <button><Link to ={`/list`}>Go back toverview</Link></button>
       <h2>Add a new sunset location:</h2>
-      <form onSubmit={this.handleSubmit}>
+      <form 
+      onSubmit={this.handleSubmit}
+      encType="multipart/form-data"
+      >
         <label>Name of the place:</label> 
             <input 
             type="text" 
@@ -147,7 +179,14 @@ export default class AddSpot extends Component {
             value={this.state.description}
             onChange={this.handleChange}
             />
-        <input type="submit" value="Add"/>
+          <input 
+          type="file" 
+          id="photo"
+          name="photo"
+          onChange={this.handleFile}
+          />
+          {/* <FileInput handleFile={this.handleFile} /> */}
+        <button type="submit" value="Add"> Add this spot</button>
       </form>
       <br/><br/><br/>
 
