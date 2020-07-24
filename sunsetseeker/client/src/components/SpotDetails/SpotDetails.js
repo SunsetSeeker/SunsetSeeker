@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import axios from "axios";
-import { Button } from 'react-bootstrap';
+// import { Button } from 'react-bootstrap';
 //import EditSpot from '../EditSpot/EditSpot';
-import AddSpot from '../AddSpot/AddSpot';
 import SpotList from '../SpotList/SpotList';
 
 export default class SpotDetails extends Component {
@@ -13,10 +12,10 @@ export default class SpotDetails extends Component {
           }; 
 
 deleteProject = () => {
-    const id = this.props.match.params.id;
-    axios.delete(`/Spot/${id}`)
+    const id = this.props.match.params.spotId;
+    axios.delete(`/server/list/${id}`)
         .then(() => {
-        this.props.history.push(`/`);
+        this.props.history.push(`/list`);
         })
 
     }              
@@ -28,41 +27,12 @@ deleteProject = () => {
         });
     };
 
-    toggleTaskForm = () => {
-        this.setState({
-            taskForm: !this.state.taskForm
-        })
-    }
-
-    handleSubmit = event => {
-        event.preventDefault();
-        const id = this.props.match.params.id;
-        axios.put(`/spots/${id}`, {
-          title: this.state.title,
-          description: this.state.description
-        })
-          .then(response => {
-            this.setState({
-              spot: response.data,
-              description: response.data.description,
-              editForm: false
-            })
-          })
-          .catch(err => {
-            console.log(err);
-          })
-      }
-
-      toggleEditForm = () => {
-        this.setState({
-          editForm: !this.state.editForm
-        })
-      }
 
       getData = () => {
-        const id = this.props.match.params.id;
+        const id = this.props.match.params.spotId;
+        console.log(id, " here ");
         axios
-          .get(`/SpotList/${id}`)
+          .get(`/server/list/${id}`)
           .then(response => {
             console.log(response.data);
             this.setState({
@@ -84,31 +54,24 @@ componentDidMount = () => {
   };
 
   render() {
+      console.log(this.state);
     if (this.state.error) return <div>{this.state.error}</div>;
-    if (!this.state.project) return (<></>)
 
     let allowedToDelete = false;
-    const user = this.props.user;
-    const owner = this.state.project.owner;
+    // const user = this.props.user;
+    // const owner = this.state.project.owner;
     // if (user && user._id === owner) allowedToDelete = true;
     return (
       <div>
-        <h1>{this.state.spot.title}</h1>
-        <p>{this.state.project.description}</p>
+        <h1>{this.state.title}</h1>
+        <p>{this.state.description}</p>
 
         {allowedToDelete && (
-          <Button variant='danger' onClick={this.deleteSpot}> Delete Project </Button>
+          <button variant='danger' onClick={this.deleteSpot}> Delete Project </button>
         )}
 
-        <Button onClick={this.toggleEditForm}> Show Edit Form </Button>
-        <Button onClick={this.toggleTaskForm}> Show Task Form </Button>
-        /* {this.state.editForm && (
-          <EditProject
-            {...this.state}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-          />
-        )} */
+        <button onClick={this.toggleEditForm}> Edit Sunset Spot </button>
+        <button onClick={this.deleteProject}> Delete Spot </button>
         
       </div>
     );

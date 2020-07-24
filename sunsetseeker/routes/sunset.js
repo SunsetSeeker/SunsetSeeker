@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const uploader = require('../configs/cloudinary');
+// const uploader = require('../configs/cloudinary');
 const Sunset = require('../models/Sunset');
 
 router.post('/', (req, res) => {
@@ -84,6 +84,7 @@ router.delete('/:id', (req, res) => {
   Sunset.findByIdAndDelete(req.params.id)
     .then(sunset => {
       // return Task.deleteMany({ _id: { $in: project.tasks } })
+      console.log("deleted");
       res.status(200).json({ message: 'ok' });
       // .then(() => {
       //   res.status(200).json({ message: 'ok' });
