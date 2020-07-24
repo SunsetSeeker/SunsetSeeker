@@ -4,12 +4,17 @@ import axios from "axios";
 //import EditSpot from '../EditSpot/EditSpot';
 import SpotList from '../SpotList/SpotList';
 
+import ReactMapGL, { Marker } from "react-map-gl";
+import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
+
 export default class SpotDetails extends Component {
 
     state= {
         title: "", 
-        description: ""
-          }; 
+        description: "",
+        latitude: "",
+        longitude: "",
+    }; 
 
 deleteProject = () => {
     const id = this.props.match.params.spotId;
@@ -37,7 +42,9 @@ deleteProject = () => {
             console.log(response.data);
             this.setState({
               title: response.data.title,
-              description: response.data.description
+              description: response.data.description,
+              latitude: response.data.latitude,
+              longitude: response.data.longitude,
             });
           })
           .catch(err => {
