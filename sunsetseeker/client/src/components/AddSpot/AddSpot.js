@@ -33,6 +33,7 @@ export default class AddSpot extends Component {
   }; 
 
 
+
   componentDidMount = () => {
     navigator.geolocation.getCurrentPosition((response) => {
       this.setState({
@@ -50,7 +51,6 @@ export default class AddSpot extends Component {
       });
     });
   };
-
 
 
 
@@ -78,11 +78,10 @@ export default class AddSpot extends Component {
     })
     .then((res) => {
       console.log(res.data);
-      this.setState({
-        title:"", 
-        description:""
-      }); 
-      this.props.getData(); 
+      
+      // this.props.getData();
+      
+      this.props.history.push(`/spotdetails/${res.data._id}`); 
     })
     .catch(err => {
       console.log(err); 

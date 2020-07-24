@@ -6,10 +6,10 @@ const Sunset = require('../models/Sunset');
 router.post('/', (req, res) => {
   const title = req.body.title;
   const description = req.body.description;
-  const img=req.body.file.secure_url; 
+  // const img=req.body.file.secure_url; 
 
-  // const latitude= req.body.latitude; 
-  // const longitude=req.body.longitude; 
+  const latitude= req.body.latitude; 
+  const longitude=req.body.longitude; 
   // const rating = [];
   // const { title, description, latitude, longitude, rating=[], img } = req.body;
   // const comment=??
@@ -19,7 +19,9 @@ router.post('/', (req, res) => {
   Sunset.create({
     title,
     description,
-    img,
+    // img,
+    latitude,
+    longitude,
 
     // latitude, 
     // longitude, 
