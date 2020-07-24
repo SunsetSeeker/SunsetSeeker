@@ -8,7 +8,7 @@ import Login from './components/Auth/Login';
 import Home from './components/Home/Home';
 import SpotList from './components/SpotList/SpotList'; 
 import AddSpot from './components/AddSpot/AddSpot'; 
-//import SpotDetails from './components/SpotDetails/SpotDetails'; 
+import SpotDetails from './components/SpotDetails/SpotDetails'; 
 import EditSpot from './components/EditSpot/EditSpot';
 import Map from './components/Map/Map';
 
@@ -106,6 +106,11 @@ class App extends React.Component {
         <Route 
         exact path="/map"
         component={Map}
+        />
+        
+        <Route
+        exact path="/spotdetails/:spotId"
+        component={SpotDetails}
         />
       
       </div>

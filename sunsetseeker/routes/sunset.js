@@ -1,18 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const uploader = require('../configs/cloudinary');
+// const uploader = require('../configs/cloudinary');
 const Sunset = require('../models/Sunset');
 
 router.post('/', (req, res) => {
   const title = req.body.title;
   const description = req.body.description;
+  const img=req.body.file.secure_url; 
 
   // const latitude= req.body.latitude; 
   // const longitude=req.body.longitude; 
   // const rating = [];
-  console.log("test")
   // const { title, description, latitude, longitude, rating=[], img } = req.body;
-  // const img=req.body.file.secure_url; 
   // const comment=??
   // const category=??
   //const user = req.user._id;
@@ -20,11 +19,11 @@ router.post('/', (req, res) => {
   Sunset.create({
     title,
     description,
-    
+    img,
+
     // latitude, 
     // longitude, 
-    // rating: 0, 
-    // img,    
+    // rating: 0,    
     // category, 
     // user: user
   })
@@ -84,6 +83,7 @@ router.delete('/:id', (req, res) => {
   Sunset.findByIdAndDelete(req.params.id)
     .then(sunset => {
       // return Task.deleteMany({ _id: { $in: project.tasks } })
+      console.log("deleted");
       res.status(200).json({ message: 'ok' });
       // .then(() => {
       //   res.status(200).json({ message: 'ok' });
@@ -93,4 +93,19 @@ router.delete('/:id', (req, res) => {
       res.json(err);
     });
 });
+
+// for image upload 
+router.post("/upload", uploadCloud.single("img"), (req, res, next) => {
+  const img=req.body.file.secure_url; 
+ 
+  Movie.create({ title, description, imgPath, imgName })
+    .then(movie => {
+      res.redirect("/");
+    })
+    .catch(error => {
+      console.log(error);
+    });
+});
+
+
 module.exports=router; 
