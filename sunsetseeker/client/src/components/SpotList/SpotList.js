@@ -42,6 +42,7 @@ export default class SpotList extends Component {
                     </div>
                 );
             })}
+            <button><Link to ={`/addSpot`}> Add a new Spot</Link></button>
         </div>
         );
     }
