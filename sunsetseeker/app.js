@@ -77,6 +77,9 @@ app.use('/server/list', require('./routes/sunset'));
 
 app.use('/server/auth', require('./routes/auth'));
 
+app.use('/server/comment', require('./routes/comment'));
+
+
 
 // const index = require('./routes/index');
 // app.use('/', index);

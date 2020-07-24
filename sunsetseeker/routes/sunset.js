@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
   // const longitude=req.body.longitude; 
   // const rating = [];
   // const { title, description, latitude, longitude, rating=[], img } = req.body;
-  // const comment=??
+  const comment = [];
   // const category=??
   //const user = req.user._id;
 
@@ -21,6 +21,7 @@ router.post('/', (req, res) => {
     title,
     description,
     img,
+    comment, 
 
     // latitude, 
     // longitude, 
