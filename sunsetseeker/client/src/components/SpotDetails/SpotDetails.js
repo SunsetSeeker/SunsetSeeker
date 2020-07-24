@@ -3,12 +3,18 @@ import axios from "axios";
 // import { Button } from 'react-bootstrap';
 //import EditSpot from '../EditSpot/EditSpot';
 import SpotList from '../SpotList/SpotList';
+import AddComment from '../AddComment/AddComment';
+import Rating from '../Rating/Rating';
+
 
 export default class SpotDetails extends Component {
 
     state= {
+        spot: null,
         title: "", 
-        description: ""
+        description: "",
+        commentForm: false,
+        rating: 0,
           }; 
 
 deleteProject = () => {
@@ -26,6 +32,19 @@ deleteProject = () => {
             [title] : title
         });
     };
+
+    handleClick = () => {
+        this.setState({
+          rating: this.state.rating + 1,
+          
+        });
+      };
+
+    toggleCommentForm = () => {
+        this.setState({
+            commentForm: !this.state.commentForm
+        })
+    }
 
 
       getData = () => {
@@ -63,6 +82,7 @@ componentDidMount = () => {
     // if (user && user._id === owner) allowedToDelete = true;
     return (
       <div>
+       
         <h1>{this.state.title}</h1>
         <p>{this.state.description}</p>
 
@@ -72,10 +92,35 @@ componentDidMount = () => {
 
         <button onClick={this.toggleEditForm}> Edit Sunset Spot </button>
         <button onClick={this.deleteProject}> Delete Spot </button>
+        <button onClick={this.toggleCommentForm}> Add a Comment </button>
+            
+            {this.state.commentForm && (
+                <AddComment
+                    spotId = { this.state._id }
+                    getData = { this.getData }
+                    hideForm = {() => this.setState({ commentForm: false })}
+                    {...this.props}
+                />
+            )}
+
+            { this.state.commentForm }
+
+            <h1> Rate this Spot </h1>
+            <br/>
+            <button
+                onClick={this.handleClick}
+                style={{
+                    fontSize: "30px",
+                    width: "200px",
+                    height: "80px",
+                    // backgroundColor: `${this.state.buttonColors[this.state.likeCounter]}`
+                }}
+                >
+                {this.state.rating} Stars
+            </button>
         
       </div>
     );
   }
 
 }
-

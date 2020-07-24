@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-// const uploader = require('../configs/cloudinary');
+const uploader = require('../configs/cloudinary');
 const Sunset = require('../models/Sunset');
 
 router.post('/', (req, res) => {
@@ -12,7 +12,7 @@ router.post('/', (req, res) => {
   // const longitude=req.body.longitude; 
   // const rating = [];
   // const { title, description, latitude, longitude, rating=[], img } = req.body;
-  // const comment=??
+  const comment = [];
   // const category=??
   //const user = req.user._id;
 
@@ -20,6 +20,7 @@ router.post('/', (req, res) => {
     title,
     description,
     img,
+    comment, 
 
     // latitude, 
     // longitude, 
@@ -95,17 +96,17 @@ router.delete('/:id', (req, res) => {
 });
 
 // for image upload 
-router.post("/upload", uploadCloud.single("img"), (req, res, next) => {
-  const img=req.body.file.secure_url; 
+// router.post("/upload", uploader.single("img"), (req, res, next) => {
+//   const img=req.body.file.secure_url; 
  
-  Movie.create({ title, description, imgPath, imgName })
-    .then(movie => {
-      res.redirect("/");
-    })
-    .catch(error => {
-      console.log(error);
-    });
-});
+//   Movie.create({ title, description, imgPath, imgName })
+//     .then(movie => {
+//       res.redirect("/");
+//     })
+//     .catch(error => {
+//       console.log(error);
+//     });
+// });
 
 
 module.exports=router; 

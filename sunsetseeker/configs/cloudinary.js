@@ -24,6 +24,6 @@
 //   }
 // });
  
-// const uploadCloud = multer({ storage: storage });
+// const uploader = multer({ storage: storage });
  
-// module.exports = uploadCloud;
+// module.exports = uploader;
