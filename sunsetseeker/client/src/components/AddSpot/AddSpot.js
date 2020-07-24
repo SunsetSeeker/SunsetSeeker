@@ -1,6 +1,7 @@
 import React, {Component} from 'react'; 
 import axios from 'axios'; 
 import FileInput from './FileInput'; 
+import { Link } from 'react-router-dom';
 
 export default class AddSpot extends Component {
   state={
@@ -64,6 +65,7 @@ export default class AddSpot extends Component {
   render(){
     return(
       <div>
+        <button><Link to ={`/list`}>Go back toverview</Link></button>
       <h2>Add a new sunset location:</h2>
       <form 
       onSubmit={this.handleSubmit}
