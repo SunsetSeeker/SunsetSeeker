@@ -7,10 +7,10 @@ router.post('/', (req, res) => {
   const title = req.body.title;
   const file = req.body.file; 
   const description = req.body.description;
-  const img=req.body.file.secure_url; 
+  // const img=req.body.file.secure_url; 
 
-  // const latitude= req.body.latitude; 
-  // const longitude=req.body.longitude; 
+  const latitude= req.body.latitude; 
+  const longitude=req.body.longitude; 
   // const rating = [];
   // const { title, description, latitude, longitude, rating=[], img } = req.body;
   const comment = [];
@@ -20,11 +20,11 @@ router.post('/', (req, res) => {
   Sunset.create({
     title,
     description,
-    img,
+    latitude,
+    longitude,
+    img, 
     comment, 
-
-    // latitude, 
-    // longitude, 
+    
     // rating: 0,    
     // category, 
     // user: user
@@ -95,6 +95,7 @@ router.delete('/:id', (req, res) => {
       res.json(err);
     });
 });
+
 
 // for image upload 
 router.post("/upload", uploader.single("img"), (req, res, next) => {

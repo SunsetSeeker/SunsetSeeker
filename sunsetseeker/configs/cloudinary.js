@@ -23,8 +23,9 @@ var storage = cloudinaryStorage({
     cb(null, trimExtension(file.originalname)); 
   }
 });
- 
+
 const uploader = multer({ storage: storage });
 module.exports = uploader;
 
+ 
 

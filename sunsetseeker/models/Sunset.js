@@ -5,8 +5,12 @@ const sunsetSchema = new Schema({
   title: String,
   description: String,
   // location: Array, 
+
+  
   latitude: Number, 
   longitude: Number,
+
+
   rating: [Number], 
   // user: { 
   //   type: Schema.Types.ObjectId, 

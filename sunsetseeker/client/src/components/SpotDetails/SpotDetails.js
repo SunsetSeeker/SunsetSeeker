@@ -7,15 +7,20 @@ import AddComment from '../AddComment/AddComment';
 import Rating from '../Rating/Rating';
 import { Link } from 'react-router-dom';
 
+import ReactMapGL, { Marker } from "react-map-gl";
+import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
+
 export default class SpotDetails extends Component {
     state= {
         spot: null,
         title: "", 
         description: "",
+        latitude: "",
+        longitude: "",
         commentForm: false,
         rating: 0,
         editForm: false,
-        }; 
+    };
 
     deleteProject = () => {
       const id = this.props.match.params.spotId;
@@ -82,7 +87,9 @@ handleClick = () => {
             // console.log(response.data);
             this.setState({
               title: response.data.title,
-              description: response.data.description
+              description: response.data.description,
+              latitude: response.data.latitude,
+              longitude: response.data.longitude,
             });
           })
           .catch(err => {
