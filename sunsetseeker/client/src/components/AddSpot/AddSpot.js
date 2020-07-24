@@ -58,6 +58,13 @@ export default class AddSpot extends Component {
             />
         <input type="submit" value="Add"/>
       </form>
+
+        {/* <ReactMapGL
+          {...this.state.viewport}
+          mapboxApiAccessToken={ process.env.REACT_APP_MAPBOX_TOKEN }
+          onViewportChange={(viewport) => this.setState({viewport})}
+        /> */}
+
       </div>
     )
   }

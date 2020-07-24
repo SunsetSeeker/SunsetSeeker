@@ -10,6 +10,7 @@ import SpotList from './components/SpotList/SpotList';
 import AddSpot from './components/AddSpot/AddSpot'; 
 import SpotDetails from './components/SpotDetails/SpotDetails'; 
 import EditSpot from './components/EditSpot/EditSpot';
+import Map from './components/Map/Map';
 
 
 // function App() {
@@ -103,6 +104,11 @@ class App extends React.Component {
         />
 
         <Route 
+        exact path="/map"
+        component={Map}
+        />
+        
+        <Route
         exact path="/spotdetails/:spotId"
         component={SpotDetails}
         />
