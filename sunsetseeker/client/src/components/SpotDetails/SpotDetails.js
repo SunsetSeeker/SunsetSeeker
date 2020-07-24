@@ -71,7 +71,7 @@ handleClick = () => {
         console.log(err); 
       })
   
-
+    }
 
     getData = () => {
         const id = this.props.match.params.spotId;
@@ -113,7 +113,7 @@ handleClick = () => {
     // const owner = this.state.project.owner;
     // if (user && user._id === owner) allowedToDelete = true;
     return (
-      <div>
+    <div>
       <Link to ={`/list`}>Go back to full list</Link>
      
         <h1>{this.state.title}</h1>
