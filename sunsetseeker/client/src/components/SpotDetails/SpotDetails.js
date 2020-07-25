@@ -165,13 +165,14 @@ export default class SpotDetails extends Component {
             </button>
         
         {this.state.editForm && (
-          <div>
+          <div><br/>
+            <button onClick={this.exitEditing}>Exit editing</button>
           <EditSpot
           {...this.state}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           />
-          <button onClick={this.exitEditing}>Exit editing</button>
+          
           </div>
         )}
       </div>
