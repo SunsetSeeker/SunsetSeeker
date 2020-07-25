@@ -7,7 +7,7 @@ router.post('/', (req, res) => {
   const title = req.body.title;
   const file = req.body.file; 
   const description = req.body.description;
-  // const img=req.body.file.secure_url; 
+  const img=req.body.file.secure_url; 
 
   const latitude= req.body.latitude; 
   const longitude=req.body.longitude; 
