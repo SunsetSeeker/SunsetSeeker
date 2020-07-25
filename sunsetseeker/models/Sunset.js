@@ -16,7 +16,7 @@ const sunsetSchema = new Schema({
   //   type: Schema.Types.ObjectId, 
   //   ref: 'User' 
   // },
-  img: String, 
+  img: [String], 
   category: {
     type: String, 
     enum: ['Sunset', 'Sunrise']

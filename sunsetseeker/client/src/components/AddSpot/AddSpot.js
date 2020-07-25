@@ -17,7 +17,7 @@ export default class AddSpot extends Component {
   state={
     title:"", 
     description:"",
-    file:"", 
+    file:[], 
     viewport: {
       latitude: 52,
       longitude: 13,
@@ -70,8 +70,12 @@ onDrop=(picture)=> {
   }; 
 
   handleFile = element => {
-    const uploadData=new FormData(); 
+    const uploadData=new FormData();
+    console.log("SHOW ME THIS"+element.target) 
     uploadData.append("img", element.target.files[0]); 
+    // for (var x=0; x<element.target.file.length; x++) {
+    //   uploadData.append("img", element.target.file[x])
+    // }
     console.log("THIS IS HAPPENING")
     this.setState({
       uploadOn:true 
