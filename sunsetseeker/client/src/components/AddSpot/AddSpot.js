@@ -68,18 +68,21 @@ onDrop=(picture)=> {
       [name]: value
     });
   }; 
+
   handleFile = element => {
     const uploadData=new FormData(); 
     uploadData.append("img", element.target.files[0]); 
-
-    console.log("THIS IS THE"+element)
+    console.log("THIS IS HAPPENING")
     this.setState({
       uploadOn:true 
     }); 
     axios
     .post("/server/list/upload", uploadData)
     .then(response =>{
-      this.setState({file:response.data})
+      this.setState({
+        file:response.data, 
+        uploadOn: false
+      })
     })
     .catch(err=> console.log(err))
   };
@@ -87,7 +90,6 @@ onDrop=(picture)=> {
 
   handleSubmit = event => {
     event.preventDefault(); 
-
     axios
     .post('/server/list', {
       title: this.state.title, 
@@ -100,8 +102,15 @@ onDrop=(picture)=> {
       console.log(res.data);
       
       // this.props.getData();
-      
-      this.props.history.push(`/spotdetails/${res.data._id}`);           
+    
+      this.props.history.push(`/spotdetails/${res.data._id}`);   
+
+      //added this again in order to check file upload to Mongo
+      this.setState({
+        title:" ", 
+        description:" ", 
+        file: " ", 
+      })        
 //     })
 //     .then((res) => {
 //       console.log(res)
@@ -154,7 +163,8 @@ onDrop=(picture)=> {
 
   render(){
     const { viewport, marker } = this.state;
-    console.log(viewport, marker)
+    // console.log(viewport, marker)
+    console.log(this.file)
     return(
       <div>
         <button><Link to ={`/list`}>Go back toverview</Link></button>

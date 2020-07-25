@@ -20,6 +20,7 @@ export default class SpotDetails extends Component {
         commentForm: false,
         rating: 0,
         editForm: false,
+        img: "", 
     };
 
     deleteProject = () => {
@@ -45,10 +46,10 @@ export default class SpotDetails extends Component {
             [name] : value
         });
     };
-handleClick = () => {
+
+    handleClick = () => {
         this.setState({
           rating: this.state.rating + 1,
-          
         });
       };
 
@@ -56,20 +57,22 @@ handleClick = () => {
         this.setState({
             commentForm: !this.state.commentForm
         })
-  }
+      }; 
    
     handleSubmit = event => {
       event.preventDefault(); 
       const id=this.props.match.params.spotId; 
       axios.put(`/server/list/${id}`, {
         title: this.state.title, 
-        description: this.state. description
+        description: this.state.description, 
+        img: this.state.img, 
       })
       .then(response => {
         this.setState({
           title: response.data.title, 
           description: response.data.description, 
-          editForm: false
+          editForm: false, 
+          img: this.state.img, 
         })
       })
       .catch(err => {
@@ -88,6 +91,7 @@ handleClick = () => {
             this.setState({
               title: response.data.title,
               description: response.data.description,
+              img: response.data.img, 
               latitude: response.data.latitude,
               longitude: response.data.longitude,
             });
@@ -125,6 +129,7 @@ handleClick = () => {
      
         <h1>{this.state.title}</h1>
         <p>{this.state.description}</p>
+        <img src={this.state.img} style={{width:"100px"}} alt="cannot be shown"/>
 
         {allowedToDelete && (
           <button variant='danger' onClick={this.deleteSpot}> Delete Project </button>
