@@ -5,6 +5,7 @@ import EditSpot from '../EditSpot/EditSpot';
 import SpotList from '../SpotList/SpotList';
 import AddComment from '../AddComment/AddComment';
 import Rating from '../Rating/Rating';
+import CommentList from '../CommentList/CommentList';
 import { Link } from 'react-router-dom';
 
 import ReactMapGL, { Marker } from "react-map-gl";
@@ -20,11 +21,11 @@ export default class SpotDetails extends Component {
         commentForm: false,
         rating: 0,
         editForm: false,
+        id: this.props.match.params.spotId,
     };
 
     deleteProject = () => {
-      const id = this.props.match.params.spotId;
-      axios.delete(`/server/list/${id}`)
+      axios.delete(`/server/list/${this.state.id}`)
         .then(() => {
         this.props.history.push(`/list`);
         })
@@ -32,7 +33,7 @@ export default class SpotDetails extends Component {
     }    
     
     toggleEditForm=()=> {
-      const id = this.props.match.params.spotId;
+    //   const id = this.props.match.params.spotId;
       // console.log(id); 
       this.setState({
         editForm: !this.state.editForm
@@ -60,8 +61,8 @@ handleClick = () => {
    
     handleSubmit = event => {
       event.preventDefault(); 
-      const id=this.props.match.params.spotId; 
-      axios.put(`/server/list/${id}`, {
+      
+      axios.put(`/server/list/${this.state.id}`, {
         title: this.state.title, 
         description: this.state. description
       })
@@ -79,10 +80,9 @@ handleClick = () => {
     }
 
     getData = () => {
-        const id = this.props.match.params.spotId;
         // console.log(id, " here ");
         axios
-          .get(`/server/list/${id}`)
+          .get(`/server/list/${this.state.id}`)
           .then(response => {
             // console.log(response.data);
             this.setState({
@@ -158,6 +158,11 @@ handleClick = () => {
                 >
                 {this.state.rating} Stars
             </button>
+
+            <h2> Comments </h2>
+
+            <CommentList spotId={this.state.id} />
+        
         
         {this.state.editForm && (
           <div>

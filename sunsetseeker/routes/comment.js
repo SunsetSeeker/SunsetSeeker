@@ -19,7 +19,7 @@ router.post('/new/:spotId', (req, res) => {
     });
 });
 
-router.get('/', (req,res) => {
+router.get('/new/:spotId', (req,res) => {
     Comment.find()
     .then(comments => {
       res.status(200).json(comments); 
@@ -28,5 +28,16 @@ router.get('/', (req,res) => {
       res.json(err); 
     })
   }); 
+
+  router.get('/:id', (req, res) => {
+    Comment.find({sunset: req.params.id})
+      .then(comments => {
+        
+          res.status(200).json(comments);
+      })
+      .catch(err => {
+        res.json(err);
+      });
+  });
 
 module.exports=router; 
