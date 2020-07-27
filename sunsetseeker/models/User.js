@@ -6,7 +6,14 @@ const userSchema = new Schema(
     username: String,
     email: String,
     password: String,
-    owner: { type: Schema.Types.ObjectId, ref: 'User' },
+
+    createdSpots: [
+      {
+        type: Schema.Types.ObjectId, 
+        ref: "Sunset"
+      }
+    ], 
+    // owner: { type: Schema.Types.ObjectId, ref: 'User' },
     comments: [
       {
         type: Schema.Types.ObjectId,

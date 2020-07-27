@@ -13,6 +13,7 @@ import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 export default class SpotDetails extends Component {
     state= {
         spot: null,
+        error: null, 
         title: "", 
         description: "",
         latitude: "",
@@ -69,6 +70,7 @@ export default class SpotDetails extends Component {
       })
       .then(response => {
         this.setState({
+          spot: response.data, 
           title: response.data.title, 
           description: response.data.description, 
           editForm: false, 
@@ -87,8 +89,9 @@ export default class SpotDetails extends Component {
         axios
           .get(`/server/list/${id}`)
           .then(response => {
-            // console.log(response.data);
+            console.log(response.data);
             this.setState({
+              spot: response.data, 
               title: response.data.title,
               description: response.data.description,
               img: response.data.img, 
@@ -116,27 +119,39 @@ export default class SpotDetails extends Component {
   }; 
 
   render() {
-      console.log(this.state);
+    console.log(this.state);
     if (this.state.error) return <div>{this.state.error}</div>;
+    if (!this.state.spot) return (<></>)
 
     let allowedToDelete = false;
-    // const user = this.props.user;
-    // const owner = this.state.project.owner;
-    // if (user && user._id === owner) allowedToDelete = true;
+    let allowedToEdit = false; 
+    const user = this.props.user;
+    // console.log(`this is the spot ${this.state.spot}`); 
+    const owner = this.state.spot.owner;
+    if (user && user._id === owner) allowedToDelete = true;
+    if (user && user._id === owner) allowedToEdit = true; 
+    console.log(`this is the user ${user._id}`);  
+    console.log(`this is the owner ${owner}`); 
     return (
     <div>
       <Link to ={`/list`}>Go back to full list</Link>
+
      
         <h1>{this.state.title}</h1>
         <p>{this.state.description}</p>
         <img src={this.state.img} style={{width:"100px"}} alt="cannot be shown"/>
 
         {allowedToDelete && (
-          <button variant='danger' onClick={this.deleteSpot}> Delete Project </button>
+          <button variant='danger' onClick={this.deleteProject}> Delete Spot </button>
+        )}
+         {allowedToEdit && (
+          <button variant='danger' onClick={this.toggleEditForm}> Edit Spot </button>
         )}
 
-        <button onClick={this.toggleEditForm}> Edit Sunset Spot </button>
-        <button onClick={this.deleteProject}> Delete Spot </button>
+
+
+        {/* <button onClick={this.toggleEditForm}> Edit Sunset Spot </button> */}
+        {/* <button onClick={this.deleteProject}> Delete Spot </button> */}
         <button onClick={this.toggleCommentForm}> Add a Comment </button>
             
             {this.state.commentForm && (
