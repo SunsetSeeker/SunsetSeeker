@@ -16,7 +16,7 @@ router.post('/', (req, res) => {
   // const { title, description, latitude, longitude, rating=[], img } = req.body;
   const comment = [];
   // const category=??
-  //const user = req.user._id;
+  const owner = req.user._id;
 
 
   Sunset.create({
@@ -26,11 +26,11 @@ router.post('/', (req, res) => {
     longitude,
     img, 
     comment, 
+    owner, 
     
     
     // rating: 0,    
     // category, 
-    // user: user
   })
     .then(sunset => {
       res.status(201).json(sunset);
