@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import axios from "axios";
-// import { Button } from 'react-bootstrap';
 import EditSpot from '../EditSpot/EditSpot';
 import SpotList from '../SpotList/SpotList';
 import AddComment from '../AddComment/AddComment';
@@ -23,12 +22,12 @@ export default class SpotDetails extends Component {
         img: "",
         viewport: {}, 
         latitude: "",
-        longitude: ""
+        longitude: ""      
+        id: this.props.match.params.spotId,
     };
 
     deleteProject = () => {
-      const id = this.props.match.params.spotId;
-      axios.delete(`/server/list/${id}`)
+      axios.delete(`/server/list/${this.state.id}`)
         .then(() => {
         this.props.history.push(`/list`);
         })
@@ -36,7 +35,7 @@ export default class SpotDetails extends Component {
 
     
     toggleEditForm=()=> {
-      const id = this.props.match.params.spotId;
+    //   const id = this.props.match.params.spotId;
       // console.log(id); 
       this.setState({
         editForm: !this.state.editForm
@@ -65,8 +64,8 @@ export default class SpotDetails extends Component {
    
     handleSubmit = event => {
       event.preventDefault(); 
-      const id=this.props.match.params.spotId; 
-      axios.put(`/server/list/${id}`, {
+      
+      axios.put(`/server/list/${this.state.id}`, {
         title: this.state.title, 
         description: this.state.description, 
         img: this.state.img, 
@@ -87,10 +86,9 @@ export default class SpotDetails extends Component {
     }
 
     getData = () => {
-        const id = this.props.match.params.spotId;
         // console.log(id, " here ");
         axios
-          .get(`/server/list/${id}`)
+          .get(`/server/list/${this.state.id}`)
           .then(response => {
             console.log("this is the axios response", response.data);
             this.setState({
@@ -184,8 +182,9 @@ export default class SpotDetails extends Component {
 
             { this.state.commentForm }
 
-            {/* <h1>Comments: </h1>
-                <CommentList/> */}
+            <h1>Comments: </h1>
+                {/* <CommentList/> */}
+
 
 
             <h1> Rate this Spot </h1>
@@ -201,6 +200,11 @@ export default class SpotDetails extends Component {
                 >
                 {this.state.rating} Stars
             </button>
+
+            <h2> Comments </h2>
+
+            <CommentList spotId={this.state.id} />
+        
         
         {this.state.editForm && (
           <div><br/>

@@ -74,10 +74,10 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.locals.title = 'Express - Generated with IronGenerator';
 
 app.use('/server/list', require('./routes/sunset')); 
-
 app.use('/server/auth', require('./routes/auth'));
-
 app.use('/server/comment', require('./routes/comment'));
+
+app.use('/server/commentlist', require('./routes/comment'));
 
 
 

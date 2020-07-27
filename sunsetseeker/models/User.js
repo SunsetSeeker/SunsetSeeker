@@ -6,6 +6,7 @@ const userSchema = new Schema(
     username: String,
     email: String,
     password: String,
+    googleID: String, 
     owner: { type: Schema.Types.ObjectId, ref: 'User' },
     createdSpots: [
       {
