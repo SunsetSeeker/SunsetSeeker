@@ -5,18 +5,17 @@ const sunsetSchema = new Schema({
   title: String,
   description: String,
   // location: Array, 
-
-  
   latitude: Number, 
   longitude: Number,
 
 
   rating: [Number], 
   owner: { 
-    type: Schema.Types.ObjectId, 
-    ref: 'User' 
-  },
-  img: [String], 
+        type: Schema.Types.ObjectId, 
+        ref: 'User' 
+      },
+  img: [String],  
+  
   category: {
     type: String, 
     enum: ['Sunset', 'Sunrise']

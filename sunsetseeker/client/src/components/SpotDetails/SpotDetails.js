@@ -17,8 +17,6 @@ export default class SpotDetails extends Component {
         error: null, 
         title: "", 
         description: "",
-        latitude: "",
-        longitude: "",
         commentForm: false,
         rating: 0,
         editForm: false,
@@ -95,9 +93,20 @@ export default class SpotDetails extends Component {
               spot: response.data, 
               title: response.data.title,
               description: response.data.description,
+              viewport: {
+                latitude: response.data.latitude,
+                longitude: response.data.longitude,
+                zoom: 15,
+                width: 800,
+                height: 600,
+                coordinates:"",
+              },               
+              
               img: response.data.img, 
               latitude: response.data.latitude,
-              longitude: response.data.longitude,
+              longitude: response.data.longitude,              
+              
+ 
             });
           })
           .catch(err => {
@@ -122,7 +131,9 @@ export default class SpotDetails extends Component {
   render() {
     console.log(this.state);
     if (this.state.error) return <div>{this.state.error}</div>;
-    if (!this.state.spot) return (<></>)
+    if (!this.state.viewport) return <div>Loading..</div>;
+    if (!this.state.spot) return (<></>) 
+
 
     let allowedToDelete = false;
     let allowedToEdit = false; 
@@ -197,6 +208,22 @@ export default class SpotDetails extends Component {
           
           </div>
         )}
+
+
+
+      <div> Map
+
+        <ReactMapGL
+        {...this.state.viewport}
+        mapboxApiAccessToken={ process.env.REACT_APP_MAPBOX_TOKEN }
+        //mapStyle="mapbox://styles/paolagaray/ckd03bp5n0n8e1ip8h490lib1"
+        onViewportChange={(viewport) => this.setState({viewport})}
+        />
+        <h6>Latitud: {this.state.viewport.latitude} </h6>
+        <h6>Longitud: {this.state.viewport.longitude} </h6>
+
+        </div>
+
       </div>
     );
   }

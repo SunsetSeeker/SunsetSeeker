@@ -9,6 +9,7 @@ router.post('/', (req, res) => {
   const description = req.body.description;
   const img=req.body.file.secure_url; 
 
+
   const latitude= req.body.latitude; 
   const longitude=req.body.longitude; 
   // const rating = [];
@@ -16,6 +17,7 @@ router.post('/', (req, res) => {
   const comment = [];
   // const category=??
   const owner = req.user._id;
+
 
   Sunset.create({
     title,
@@ -25,6 +27,7 @@ router.post('/', (req, res) => {
     img, 
     comment, 
     owner, 
+    
     
     // rating: 0,    
     // category, 
