@@ -4,6 +4,7 @@ import axios from 'axios';
 import AddSpot from '../AddSpot/AddSpot';
 import ReactMapGL, { Marker } from "react-map-gl";
 import Pin from "../AddSpot/Pin";
+import "./SpotList.scss";
 
 
 
@@ -82,10 +83,16 @@ export default class SpotList extends Component {
                   longitude={ sunset.longitude }
                   latitude={ sunset.latitude }
                   >
-                   <Pin size={20} />
+                   {/* <Pin size={5} /> */}
+
                    {/* <button class="marker-btn">
-                    <img src = "/logo192.png" alt="sunset icon" />
+                    <img src = { sunset.img } alt="sunset icon" />
                    </button> */}
+                   
+                   <Link to={`/spotdetails/${sunset._id}`}>
+                   <img className="marker-btn-img" src = { sunset.img } alt="sunset icon" />
+                  </Link>
+                  
                 </Marker>
             )} 
 
