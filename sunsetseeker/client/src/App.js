@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
 import { Route, Redirect } from 'react-router-dom';
-//import SpotList from './components/SpotList/SpotList';
 import Navbar from './components/Navbar/Navbar';
 import Signup from './components/Auth/Signup';
 import Login from './components/Auth/Login';

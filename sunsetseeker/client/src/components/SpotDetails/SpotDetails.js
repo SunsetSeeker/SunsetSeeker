@@ -179,7 +179,7 @@ export default class SpotDetails extends Component {
             { this.state.commentForm }
 
             <h1>Comments: </h1>
-                <CommentList/>
+                {/* <CommentList/> */}
 
 
 
