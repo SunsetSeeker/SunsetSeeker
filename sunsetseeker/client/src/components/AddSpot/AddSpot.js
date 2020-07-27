@@ -1,4 +1,5 @@
 import * as React from "react";
+import './AddSpot.css';
 import { Component } from "react";
 import axios from 'axios'; 
 // import FileInput from './FileInput'; 
@@ -171,7 +172,7 @@ onDrop=(picture)=> {
   render(){
     const { viewport, marker } = this.state;
     // console.log(viewport, marker)
-    console.log(this.file)
+    console.log(this.file);  
     return(
       <div>
         <button><Link to ={`/list`}>Go back toverview</Link></button>
@@ -205,13 +206,27 @@ onDrop=(picture)=> {
               // onChange={this.handleFile}
               onChange={(event)=> this.handleFile(event)}
               />
+
               {this.state.uploadText}
+              {this.state.uploadText=="It's uploading.." && (
+              <div class="bouncing-loader">
+              <div></div>
+              <div></div>
+              <div></div>
+              </div>              
+              )}
               {/* {this.state.file.map((f) => (
                 <div className="filepreview" onClick={this.removeFile.bind(this, f)}>{f.name}</div>
               ))} */}
           </div>
+
+
           {/* <FileInput handleFile={this.handleFile} /> */}
-        <button type="submit" value="Add"> Add this spot</button>
+
+              {this.state.uploadText=="Upload successful." && (
+               <button type="submit" value="Add"> Add this spot</button> 
+              )}
+        
       </form>
       <br/><br/><br/>
 
