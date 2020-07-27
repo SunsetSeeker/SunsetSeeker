@@ -1,12 +1,10 @@
 import React, {Component} from "react";
 import axios from "axios";
-// import { Button } from 'react-bootstrap';
 import EditSpot from '../EditSpot/EditSpot';
 import SpotList from '../SpotList/SpotList';
 import AddComment from '../AddComment/AddComment';
 import CommentList from '../CommentList/CommentList'; 
 import Rating from '../Rating/Rating';
-import CommentList from '../CommentList/CommentList';
 import { Link } from 'react-router-dom';
 
 import ReactMapGL, { Marker } from "react-map-gl";

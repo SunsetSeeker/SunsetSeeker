@@ -1,14 +1,11 @@
 import * as React from "react";
 import { Component } from "react";
 import axios from 'axios'; 
-import FileInput from './FileInput'; 
+// import FileInput from './FileInput'; 
 import { Link } from 'react-router-dom';
-
 import Pin from "./Pin";
-
 import { render } from "react-dom";
 import MapGL, { Marker } from "react-map-gl";
-
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import ReactMapGL from "react-map-gl";
 
@@ -18,6 +15,7 @@ export default class AddSpot extends Component {
     title:"", 
     description:"",
     file:[], 
+    uploadText: "Choose a photo", 
     viewport: {
       latitude: 52,
       longitude: 13,
@@ -31,7 +29,6 @@ export default class AddSpot extends Component {
       longitude: 13.4069,
     },
     events: {},
-
   }; 
 
 
@@ -69,7 +66,11 @@ onDrop=(picture)=> {
     });
   }; 
 
-  handleFile = element => {
+  handleFile = element => {    
+    this.setState({
+      // uploadOn:true, 
+      uploadText:"It's uploading.."
+    }); 
     const uploadData=new FormData();
     console.log("SHOW ME THIS"+element.target) 
     uploadData.append("img", element.target.files[0]); 
@@ -77,15 +78,14 @@ onDrop=(picture)=> {
     //   uploadData.append("img", element.target.file[x])
     // }
     console.log("THIS IS HAPPENING")
-    this.setState({
-      uploadOn:true 
-    }); 
+
     axios
     .post("/server/list/upload", uploadData)
     .then(response =>{
       this.setState({
         file:response.data, 
-        uploadOn: false
+        // uploadOn: false, 
+        uploadText: "Upload successful."
       })
     })
     .catch(err=> console.log(err))
@@ -163,6 +163,9 @@ onDrop=(picture)=> {
     });
   };
 
+  removeFile(f) {
+    this.setState({file:this.state.file.filter((x) => x!==f)}); 
+  }
 
 
   render(){
@@ -193,12 +196,20 @@ onDrop=(picture)=> {
             value={this.state.description}
             onChange={this.handleChange}
             />
-          <input 
-          type="file" 
-          id="photo"
-          name="photo"
-          onChange={this.handleFile}
-          />
+            <div className="fileInput">
+              <input 
+              type="file" 
+              id="photo"
+              name="photo"
+              data-cloudinary-field="img_id"
+              // onChange={this.handleFile}
+              onChange={(event)=> this.handleFile(event)}
+              />
+              {this.state.uploadText}
+              {/* {this.state.file.map((f) => (
+                <div className="filepreview" onClick={this.removeFile.bind(this, f)}>{f.name}</div>
+              ))} */}
+          </div>
           {/* <FileInput handleFile={this.handleFile} /> */}
         <button type="submit" value="Add"> Add this spot</button>
       </form>
