@@ -15,11 +15,18 @@ export default class SpotDetails extends Component {
         spot: null,
         title: "", 
         description: "",
-        latitude: "",
-        longitude: "",
         commentForm: false,
         rating: 0,
         editForm: false,
+
+        // viewport: {
+        //   latitude: 52,
+        //   longitude: 13,
+        //   zoom: 15,
+        //   width: 800,
+        //   height: 600,
+        //   coordinates:"",
+        // }, 
     };
 
     deleteProject = () => {
@@ -45,7 +52,8 @@ export default class SpotDetails extends Component {
             [name] : value
         });
     };
-handleClick = () => {
+
+    handleClick = () => {
         this.setState({
           rating: this.state.rating + 1,
           
@@ -88,8 +96,14 @@ handleClick = () => {
             this.setState({
               title: response.data.title,
               description: response.data.description,
-              latitude: response.data.latitude,
-              longitude: response.data.longitude,
+              viewport: {
+                latitude: response.data.latitude,
+                longitude: response.data.longitude,
+                zoom: 15,
+                width: 800,
+                height: 600,
+                coordinates:"",
+              }, 
             });
           })
           .catch(err => {
@@ -114,6 +128,7 @@ handleClick = () => {
   render() {
       console.log(this.state);
     if (this.state.error) return <div>{this.state.error}</div>;
+    if (!this.state.viewport) return <div>Loading..</div>;
 
     let allowedToDelete = false;
     // const user = this.props.user;
@@ -169,6 +184,22 @@ handleClick = () => {
           <button onClick={this.exitEditing}>Exit editing</button>
           </div>
         )}
+
+
+
+      <div> Map
+
+        <ReactMapGL
+        {...this.state.viewport}
+        mapboxApiAccessToken={ process.env.REACT_APP_MAPBOX_TOKEN }
+        //mapStyle="mapbox://styles/paolagaray/ckd03bp5n0n8e1ip8h490lib1"
+        onViewportChange={(viewport) => this.setState({viewport})}
+        />
+        <h6>Latitud: {this.state.viewport.latitude} </h6>
+        <h6>Longitud: {this.state.viewport.longitude} </h6>
+
+        </div>
+
       </div>
     );
   }
