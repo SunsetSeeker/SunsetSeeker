@@ -22,7 +22,7 @@ export default class SpotDetails extends Component {
         img: "",
         viewport: {}, 
         latitude: "",
-        longitude: ""      
+        longitude: "",      
         id: this.props.match.params.spotId,
     };
 
