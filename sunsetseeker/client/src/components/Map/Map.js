@@ -42,7 +42,7 @@ class Map extends Component {
       <ReactMapGL
         {...this.state.viewport}
         mapboxApiAccessToken={ process.env.REACT_APP_MAPBOX_TOKEN }
-        mapStyle="mapbox://styles/paolagaray/ckd03bp5n0n8e1ip8h490lib1"
+        //mapStyle="mapbox://styles/paolagaray/ckd03bp5n0n8e1ip8h490lib1"
         onViewportChange={(viewport) => this.setState({viewport})}
       />
     );

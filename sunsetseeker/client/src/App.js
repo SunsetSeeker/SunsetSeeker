@@ -97,7 +97,11 @@ class App extends React.Component {
 
         <Route
         exact path="/addSpot"
-        component={AddSpot}
+        // component={AddSpot}
+        render={props=> {
+          if (this.state.user) return <AddSpot {...props} />
+          else return <Redirect to="/signup"/>
+        }}
         />
 
         <Route 
@@ -112,7 +116,8 @@ class App extends React.Component {
         
         <Route
         exact path="/spotdetails/:spotId"
-        component={SpotDetails}
+        // component={SpotDetails}
+        render={props => <SpotDetails user={this.state.user} {...props}/>}
         />
       
       </div>

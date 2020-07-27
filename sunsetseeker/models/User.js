@@ -7,6 +7,13 @@ const userSchema = new Schema(
     email: String,
     password: String,
     owner: { type: Schema.Types.ObjectId, ref: 'User' },
+    createdSpots: [
+      {
+        type: Schema.Types.ObjectId, 
+        ref: "Sunset"
+      }
+    ],    
+
     comments: [
       {
         type: Schema.Types.ObjectId,
