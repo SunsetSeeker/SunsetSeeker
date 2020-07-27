@@ -4,6 +4,7 @@ import axios from "axios";
 import EditSpot from '../EditSpot/EditSpot';
 import SpotList from '../SpotList/SpotList';
 import AddComment from '../AddComment/AddComment';
+import CommentList from '../CommentList/CommentList'; 
 import Rating from '../Rating/Rating';
 import { Link } from 'react-router-dom';
 
@@ -102,9 +103,9 @@ export default class SpotDetails extends Component {
           .catch(err => {
             console.log(err.response);
             // handle err.response depending on err.response.status
-            if (err.response.status === 404) {
-              this.setState({ error: "Not found" });
-            }
+            // if (err.response.status === 404) {
+            //   this.setState({ error: "Not found" });
+            // }
           });
       };
 
@@ -164,6 +165,12 @@ export default class SpotDetails extends Component {
             )}
 
             { this.state.commentForm }
+
+            <h1>Comments: </h1>
+                <CommentList/>
+
+
+
 
             <h1> Rate this Spot </h1>
             <br/>
