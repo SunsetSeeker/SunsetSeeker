@@ -6,7 +6,8 @@ import AddComment from '../AddComment/AddComment';
 export default class CommentList extends Component {
 
     state = {
-        comments: []
+        comments: [],
+        message: "",
       };
     
       componentDidMount = () => {
@@ -16,33 +17,36 @@ export default class CommentList extends Component {
       getData = () => {
 
         axios
-          .get(`/server/comment`)
+          .get(`/server/commentlist/${this.props.spotId}`)
           .then(response => {
-              console.log("testeTste",response)
-            this.setState({
-                sunsets: response.data
-            });
+              console.log("teste teste",response)
+              if(response.data.length == 0) {
+                this.setState({
+                  message: "no comments",
+              });
+              } else {
+                this.setState({
+                  comments: response.data,
+              });
+              }
           })
           .catch(err => {
             console.log("error",err);
           });
       };
 
-    render() {
+   render() {
+     return (
+       <div>
+        <h1> Test </h1> 
+        {this.state.message && <p>{this.state.message}</p>}
+        { this.state.comments.map(comment => {
+          return (
+            <p key={comment._id}>{comment.text}</p>
+          )
+        }) } 
+      </div>
+     )
 
-    return(
-        <div>
-            <h2> List of Views next to the location </h2>
-            {this.state.sunsets.map(sunset => {
-                return (
-                    <div key={sunset._id}>
-                        <h3>
-                            <Link to={`/spotdetails/${sunset._id}`} > {sunset.title}</Link>
-                        </h3>
-                    </div>
-                );
-            })}
-        </div>
-        );
-    }
+   }
 }

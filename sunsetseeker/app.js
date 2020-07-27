@@ -79,6 +79,8 @@ app.use('/server/auth', require('./routes/auth'));
 
 app.use('/server/comment', require('./routes/comment'));
 
+app.use('/server/commentlist', require('./routes/comment'));
+
 
 
 // const index = require('./routes/index');
