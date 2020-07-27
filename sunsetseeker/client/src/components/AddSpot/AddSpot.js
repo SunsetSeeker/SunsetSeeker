@@ -187,6 +187,7 @@ onDrop=(picture)=> {
             name="title"
             value={this.state.title}
             onChange={this.handleChange}
+            required
             />
         <label>Tell us more about the place:</label>
             <input
@@ -222,7 +223,7 @@ onDrop=(picture)=> {
 
           {/* <FileInput handleFile={this.handleFile} /> */}
 
-              {this.state.uploadText=="Upload successful." && (
+              {this.state.uploadText!=="It's uploading.." && (
                <button type="submit" value="Add"> Add this spot</button> 
               )}
         

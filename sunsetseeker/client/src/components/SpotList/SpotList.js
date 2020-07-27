@@ -6,6 +6,7 @@ import ReactMapGL, { Marker } from "react-map-gl";
 import Pin from "../AddSpot/Pin";
 
 
+
 export default class SpotList extends Component {
   
     state = {

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './App.css';
 import { Route, Redirect } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
@@ -10,7 +10,8 @@ import AddSpot from './components/AddSpot/AddSpot';
 import SpotDetails from './components/SpotDetails/SpotDetails'; 
 import EditSpot from './components/EditSpot/EditSpot';
 import Map from './components/Map/Map';
-import CommentList from './components/CommentList/CommentList';
+import Profile from './components/Profile/Profile'; 
+// import CommentList from './components/CommentList/CommentList';
 
 
 // function App() {
@@ -106,6 +107,11 @@ class App extends React.Component {
         <Route 
         exact path="/editSpot/:spotId"
         component={EditSpot}
+        />
+
+        <Route
+        exact path="/profile"
+        component={Profile}
         />
 
         <Route 
