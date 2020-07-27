@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import AddSpot from '../AddSpot/AddSpot';
+// import AddSpot from '../AddSpot/AddSpot';
 
 export default class SpotList extends Component {
 
