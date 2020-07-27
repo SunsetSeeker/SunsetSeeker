@@ -12,10 +12,10 @@ const sunsetSchema = new Schema({
 
 
   rating: [Number], 
-  // user: { 
-  //   type: Schema.Types.ObjectId, 
-  //   ref: 'User' 
-  // },
+  owner: { 
+    type: Schema.Types.ObjectId, 
+    ref: 'User' 
+  },
   img: [String], 
   category: {
     type: String, 
