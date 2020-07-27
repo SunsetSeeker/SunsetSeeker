@@ -20,9 +20,9 @@ export default class AddSpot extends Component {
     viewport: {
       latitude: 52,
       longitude: 13,
-      zoom: 15,
-      width: 800,
-      height: 600,
+      zoom: 10,
+      width: 600,
+      height: 400,
       coordinates:"",
     },
     marker: {
@@ -33,16 +33,15 @@ export default class AddSpot extends Component {
   }; 
 
 
-
   componentDidMount = () => {
     navigator.geolocation.getCurrentPosition((response) => {
       this.setState({
         viewport: {
           latitude: response.coords.latitude,
           longitude: response.coords.longitude,
-          width: 800,
-          height: 600,
-          zoom: 15,
+          width: 600,
+          height: 400,
+          zoom: 10,
         },
         marker: {
           latitude: response.coords.latitude,
