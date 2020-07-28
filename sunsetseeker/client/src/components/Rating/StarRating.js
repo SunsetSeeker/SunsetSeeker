@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { FaStar } from 'react-icons/fa';
 import axios from "axios";
+import "./StarRating.scss";
 
-export default class StarRating extends Component { 
+export default class Favorite extends Component { 
     state={
         rating: 0,
         hover: 0
@@ -44,6 +45,7 @@ return (
             return (
                 <label>
                     <input 
+                        className='ratingstars'
                         type='radio' 
                         name='rating' 
                         value={ratingValue}

@@ -11,6 +11,7 @@ import SpotDetails from './components/SpotDetails/SpotDetails';
 import EditSpot from './components/EditSpot/EditSpot';
 import Map from './components/Map/Map';
 import Profile from './components/Profile/Profile'; 
+import Favorites from './components/Favorites/Favorites'; 
 // import CommentList from './components/CommentList/CommentList';
 
 
@@ -77,6 +78,7 @@ class App extends React.Component {
           path='/signup'
           render={props => <Signup setUser={this.setUser} {...props} />}
         />
+
         <Route
           exact
           path='/'
@@ -112,6 +114,17 @@ class App extends React.Component {
         <Route
         exact path="/profile"
         component={Profile}
+        />
+
+
+        <Route
+          exact path="/profile"
+          render={(props) => (
+            <Profile
+              setUser={this.setUser} user={this.state.user} 
+              {...props}
+            />
+          )}
         />
 
         <Route 

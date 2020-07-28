@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const uploader = require('../configs/cloudinary.js');
 const Sunset = require('../models/Sunset');
+const User = require('../models/User');
 
 router.post('/', (req, res) => {
   const title = req.body.title;
@@ -67,6 +68,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// For rating feature 
 router.put('/rating/:id', (req, res) => {
   const { rating } = req.body;
 
@@ -83,6 +85,25 @@ router.put('/rating/:id', (req, res) => {
       res.json(err);
     });
 });
+
+// For favorite feature 
+router.put('/rating/:id', (req, res) => {
+  const { rating } = req.body;
+
+  Sunset.findByIdAndUpdate(
+    req.params.id,
+    { $push: {rating: rating} },
+    // { new: true } ensures that we are getting the updated document in the .then callback
+    { new: true }
+  )
+    .then(sunset => {
+      res.status(200).json(sunset);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+
 
 router.put('/:id', (req, res) => {
   const { title, description, img } = req.body;
@@ -138,6 +159,72 @@ router.patch("/rating/:id", (req, res) => {
     },
     { new: true }
   ).then((place) => res.json(place));
+});
+
+router.put("/favorites/:placeId", async (req, res) => {
+  const userId = req.user._id;
+  let user = await User.findById(userId);
+  let isFavorite = user.favorites.find((favorite) => {
+    return favorite == req.params.placeId;
+  });
+  if (isFavorite) {
+    User.findByIdAndUpdate(
+      userId,
+      {
+        $pull: { favorites: req.params.placeId },
+      },
+      {
+        new: true,
+      }
+    )
+      .populate("favorites")
+      .then((userUpdated) => {
+        Sunset.findByIdAndUpdate(
+          req.params.placeId,
+          {
+            $inc: {likes: -1},
+          },
+          { new: true }
+        ).then(sunsetUpdated => res.json(sunsetUpdated))
+        res.json(userUpdated)
+      })
+      .catch((err) => res.status(400).json(err));
+  } else {
+    User.findByIdAndUpdate(
+      userId,
+      {
+        $push: { favorites: req.params.placeId },
+      },
+      {
+        new: true,
+      }
+    )
+      .populate("favorites")
+      .then((userUpdated) => {
+        Sunset.findByIdAndUpdate(
+          req.params.placeId,
+          {
+            $inc: {likes: 1},
+          },
+          { new: true }
+        ).then(sunsetUpdated => res.json(sunsetUpdated))
+      })
+      .catch((err) => res.status(400).json(err));
+  }
+});
+
+router.get("/favorites", (req, res) => {
+  User.findById(req.user._id)
+    .populate("favorites")
+    .then((user) => {
+      if (!user) {
+        res.status(404).json(user);
+      }
+      res.json(user);
+    })
+    .catch((error) => {
+      res.json(error);
+    });
 });
 
 
