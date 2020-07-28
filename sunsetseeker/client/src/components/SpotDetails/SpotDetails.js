@@ -38,6 +38,7 @@ export default class SpotDetails extends Component {
 
     deleteImage = () => {
       console.log("this is executed")
+      fetch(`/server/list/deletepic/${this.state.id}`)
     }
     // handleRating = (value) => {
     //   const newRating = (this.state.rating + value) / 2;
