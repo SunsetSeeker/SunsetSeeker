@@ -141,7 +141,19 @@ router.patch("/rating/:id", (req, res) => {
   ).then((place) => res.json(place));
 });
 
-
+router.get('/edit/:id', (req, res) => {
+  Sunset.findById(req.params.id)
+    .then(sunset => {
+      if (!sunset) {
+        res.status(404).json(sunset);
+      } else {
+        res.status(200).json(sunset);
+      }
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
 
 
 module.exports=router; 
