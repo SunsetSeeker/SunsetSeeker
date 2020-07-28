@@ -141,19 +141,30 @@ router.patch("/rating/:id", (req, res) => {
   ).then((place) => res.json(place));
 });
 
-router.get('/edit/:id', (req, res) => {
-  Sunset.findById(req.params.id)
-    .then(sunset => {
-      if (!sunset) {
-        res.status(404).json(sunset);
-      } else {
-        res.status(200).json(sunset);
-      }
-    })
-    .catch(err => {
-      res.json(err);
-    });
-});
+// router.get('/edit/:id', (req, res) => {
+//   Sunset.findById(req.params.id)
+//     .then(sunset => {
+//       if (!sunset) {
+//         res.status(404).json(sunset);
+//       } else {
+//         res.status(200).json(sunset);
+//       }
+//     })
+//     .catch(err => {
+//       res.json(err);
+//     });
+// });
 
+
+router.delete('/deletepic/:id', (req, res) => {
+  //delete only one picture
+  const pic=req.params.singleImg; 
+  console.log("DELETE IT", pic)
+  Sunset.findByIdAndUpdate( 
+    {$pull: {name: pic}}
+    ).then(() =>
+    res.status(200).json({message: "ok"})); 
+    console.log("picture deleted.")
+})
 
 module.exports=router; 
