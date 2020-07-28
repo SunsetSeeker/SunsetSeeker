@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { logout } from '../../services/auth';
 import profileIcon from './profile-icon.png';
+import './Navbar.css'; 
 
 const handleLogout = props => {
   logout().then(() => {

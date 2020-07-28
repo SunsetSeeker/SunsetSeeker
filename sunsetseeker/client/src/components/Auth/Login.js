@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { login } from '../../services/auth';
 import googleLogo from './google-logo.png'; 
+import './Auth.css'
 
 export default class Login extends Component {
   state = {
@@ -47,7 +48,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <>
+      <div className="container">
         <h2>Login</h2>
         <form onSubmit={this.handleSubmit}>
      
@@ -89,7 +90,7 @@ export default class Login extends Component {
           <button><img src={googleLogo} style={{width:"15px"}} alt="google icon"/>  Continue with Google</button>
         </form> */}
 
-      </>
+      </div>
     );
   }
 }
