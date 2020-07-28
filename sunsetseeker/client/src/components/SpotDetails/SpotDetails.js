@@ -4,11 +4,19 @@ import EditSpot from '../EditSpot/EditSpot';
 // import SpotList from '../SpotList/SpotList';
 import AddComment from '../AddComment/AddComment';
 import CommentList from '../CommentList/CommentList'; 
-// import Rating from '../Rating/Rating';
+
 import { Link } from 'react-router-dom';
+import StarRating from '../Rating/StarRating';  
+
+import ReactMapGL, { Marker } from 'react-map-gl';
+
+// import Rating from '../Rating/Rating';
+
 import Pin from "../AddSpot/Pin";
-import ReactMapGL, { Marker } from "react-map-gl";
+
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
+
+
 
 export default class SpotDetails extends Component {
     state= {
@@ -32,6 +40,18 @@ export default class SpotDetails extends Component {
         this.props.history.push(`/list`);
         })
     }   
+
+
+    // handleRating = (value) => {
+    //   const newRating = (this.state.rating + value) / 2;
+    //   axios
+    //     .put(`/rating/${props.match.params.id}`, {
+    //       rating: newRating,
+    //     })
+    //     .then((res) => setRating(res.data.rating));
+  
+    //   // console.log(value);
+    // };
 
     
     toggleEditForm=()=> {
@@ -71,6 +91,7 @@ export default class SpotDetails extends Component {
         img: this.state.img, 
       })
       .then(response => {
+        // setRating(response.data.rating);
         this.setState({
           spot: response.data, 
           title: response.data.title, 
@@ -106,7 +127,7 @@ export default class SpotDetails extends Component {
                 height: 400,
                 coordinates:"",
               },               
-              
+              rating: response.data.rating,
               img: response.data.img, 
               latitude: response.data.latitude,
               longitude: response.data.longitude,              
@@ -183,23 +204,12 @@ export default class SpotDetails extends Component {
             { this.state.commentForm }
 
             <h1>Comments: </h1>
-                {/* <CommentList/> */}
-
-
 
             <h1> Rate this Spot </h1>
             <br/>
-            <button
-                onClick={this.handleClick}
-                style={{
-                    fontSize: "30px",
-                    width: "200px",
-                    height: "80px",
-                    // backgroundColor: `${this.state.buttonColors[this.state.likeCounter]}`
-                }}
-                >
-                {this.state.rating} Stars
-            </button>
+           
+
+            <StarRating spotId={this.state.id} rating={this.state.rating} />
 
             <h2> Comments </h2>
 
