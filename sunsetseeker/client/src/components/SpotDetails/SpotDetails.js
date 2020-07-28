@@ -6,10 +6,14 @@ import AddComment from '../AddComment/AddComment';
 import CommentList from '../CommentList/CommentList'; 
 import { Link } from 'react-router-dom';
 import StarRating from '../Rating/StarRating';  
+
+import Favorite from '../Favorites/Favorites';
+
 import ReactMapGL, { Marker } from 'react-map-gl';
 // import Rating from '../Rating/Rating';
 import Pin from "../AddSpot/Pin";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
+import Favorites from "../Favorites/Favorites";
 
 
 
@@ -27,6 +31,7 @@ export default class SpotDetails extends Component {
         latitude: "",
         longitude: "",
         id: this.props.match.params.spotId,
+        likes: 0
     };
 
     deleteProject = () => {
@@ -142,6 +147,7 @@ export default class SpotDetails extends Component {
               description: response.data.description,
               latitude: response.data.latitude,
               longitude: response.data.longitude,
+              likes: response.data.likes,
               
               viewport: {
                 latitude: response.data.latitude,
@@ -253,6 +259,10 @@ export default class SpotDetails extends Component {
         <CommentList spotId={this.state.id} />
         
 
+
+            <CommentList spotId={this.state.id} />
+
+            <Favorites spotId={this.state.id} likes={this.state.likes} />
 
         
         

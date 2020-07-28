@@ -8,7 +8,10 @@ const sunsetSchema = new Schema({
   latitude: Number, 
   longitude: Number,
 
-
+  likes: {
+    type: Number,
+    default: 0,
+  },
   rating: [Number], 
   owner: { 
         type: Schema.Types.ObjectId, 

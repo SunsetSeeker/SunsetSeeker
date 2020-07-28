@@ -21,9 +21,7 @@ const userSchema = new Schema(
         ref: 'Comment'
       }
     ],
-    
-
-      favorites: [{ type: Schema.Types.ObjectId, ref: "Sunset" }],
+    favorites: [{ type: Schema.Types.ObjectId, ref: "Sunset" }],
     },
     {
       timestamps: true,
