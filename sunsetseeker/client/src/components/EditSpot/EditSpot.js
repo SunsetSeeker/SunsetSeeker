@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import axios from 'axios'; 
+import axios from 'axios'; 
 
 class EditSpot extends Component {
   state={
@@ -8,9 +8,39 @@ class EditSpot extends Component {
 
   onDrop=(picture)=> {
     this.setState({
-      file:this.state.file.concat(picture)
+      files:this.state.files.concat(picture)
     }); 
   }  
+
+  handleFile = element => {    
+    this.setState({
+      // uploadOn:true, 
+      uploadText:"It's uploading.."
+    }); 
+    // console.log(element.target.files);
+    const uploadData=new FormData();
+    console.log("SHOW ME THIS"+element.target); 
+    const photos=element.target.files; 
+    console.log("Photos or element.target.files:", photos); 
+    // uploadData.append("img", element.target.files[0]); 
+    //for (var x=0; x<element.target.files.length; x++) {
+      photos.forEach(file => {
+        uploadData.append("img", file)
+        axios
+        .post("/server/list/upload", uploadData)
+        .then(response => {
+          this.setState({
+            files: [...this.state.files, response.data],
+            // uploadOn: false, 
+            uploadText: "Upload successful."
+          })
+        })
+        .catch(err=> console.log(err))
+        
+      })
+    console.log("THIS IS HAPPENING")
+
+  };
 
   // fileChangeHandler = (e) => {
   //   console.log("this is executed")
@@ -37,11 +67,12 @@ class EditSpot extends Component {
 
   
   render() {
-    console.log(this.state); 
+    console.log(this.state.files, "FILES"); 
     return(
       <div>
         <h2>Edit the spot you created:</h2>
-        <form onSubmit={this.props.handleSubmit}>
+        <form onSubmit={this.props.handleSubmit}
+      encType="multipart/form-data">
         <label>Name of the place:</label><br/>
             <input 
             type="text" 
@@ -68,7 +99,8 @@ class EditSpot extends Component {
           type="file" 
           id="photo"
           name="photo"
-          multiple onChange={this.props.handleFile}
+          multiple
+          onChange={(event)=> this.handleFile(event)}
           />
 
         {/* delete photo */}

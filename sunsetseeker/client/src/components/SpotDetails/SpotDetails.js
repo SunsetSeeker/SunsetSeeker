@@ -19,10 +19,10 @@ export default class SpotDetails extends Component {
         commentForm: false,
         rating: 0,
         editForm: false,
-        img: "",
+        img: [],
         viewport: {}, 
         latitude: "",
-        longitude: ""      
+        longitude: "",    
         id: this.props.match.params.spotId,
     };
 
@@ -135,6 +135,7 @@ export default class SpotDetails extends Component {
 
   render() {
     console.log(this.state);
+    console.log("These are the pictures:", this.state.img)
     if (this.state.error) return <div>{this.state.error}</div>;
     if (!this.state.viewport) return <div>Loading..</div>;
     if (!this.state.spot) return (<></>) 
@@ -156,7 +157,10 @@ export default class SpotDetails extends Component {
      
         <h1>{this.state.title}</h1>
         <p>{this.state.description}</p>
-        <img src={this.state.img} style={{width:"100px"}} alt="cannot be shown"/>
+        {/* <img src={this.state.img} style={{width:"100px"}} alt="pics"/> */}
+        {this.state.img.map(singleImg => {
+                    return (<span> <br/> <img src={singleImg} style={{width:"100px"}} alt="pic"/></span>);
+                })}
 
         {allowedToDelete && (
           <button variant='danger' onClick={this.deleteProject}> Delete Spot </button>
@@ -182,11 +186,6 @@ export default class SpotDetails extends Component {
 
             { this.state.commentForm }
 
-            <h1>Comments: </h1>
-                {/* <CommentList/> */}
-
-
-
             <h1> Rate this Spot </h1>
             <br/>
             <button
@@ -201,9 +200,8 @@ export default class SpotDetails extends Component {
                 {this.state.rating} Stars
             </button>
 
-            <h2> Comments </h2>
-
-            <CommentList spotId={this.state.id} />
+        <h2> Comments </h2>
+        <CommentList spotId={this.state.id} />
         
         
         {this.state.editForm && (

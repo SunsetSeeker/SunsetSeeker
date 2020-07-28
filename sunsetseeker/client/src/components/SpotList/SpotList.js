@@ -51,7 +51,8 @@ export default class SpotList extends Component {
                         <div key={sunset._id}>
                             <h3>
                                 <Link to={`/spotdetails/${sunset._id}`} > {sunset.title}</Link>
-                                <span> <br/> <img src={sunset.img} style={{width:"100px"}}/></span>
+                                {/* showing only the first image of the sunset */}
+                                <span> <br/> <img src={sunset.img[0]} style={{width:"100px"}} alt="pic"/></span>
                             </h3>
                         </div>
                     );

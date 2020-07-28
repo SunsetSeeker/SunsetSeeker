@@ -7,7 +7,7 @@ router.post('/', (req, res) => {
   const title = req.body.title;
   const file = req.body.file; 
   const description = req.body.description;
-  const img=req.body.file.secure_url; 
+  const img=req.body.file; 
 
 
   const latitude= req.body.latitude; 
@@ -34,6 +34,7 @@ router.post('/', (req, res) => {
   })
     .then(sunset => {
       res.status(201).json(sunset);
+
     })
     .catch(err => {
       res.json(err);
@@ -100,7 +101,7 @@ router.delete('/:id', (req, res) => {
 });
 
 
-// for image upload 
+// for image upload
 router.post("/upload", uploader.single("img"), (req, res, next) => {
   // const img=req.body.file.secure_url; 
   if(!req.file) {
@@ -109,6 +110,8 @@ router.post("/upload", uploader.single("img"), (req, res, next) => {
   }
   res.json({secure_url: req.file.secure_url}); 
 });
+
+
 
 
 module.exports=router; 
