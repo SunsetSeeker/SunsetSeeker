@@ -27,6 +27,7 @@ router.post('/', (req, res) => {
     img, 
     comment, 
     owner, 
+    rating: 0,
     
     
     // rating: 0,    
@@ -60,6 +61,23 @@ router.get('/:id', (req, res) => {
       } else {
         res.status(200).json(sunset);
       }
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+
+router.put('/rating/:id', (req, res) => {
+  const { rating } = req.body;
+
+  Sunset.findByIdAndUpdate(
+    req.params.id,
+    { $push: {rating: rating} },
+    // { new: true } ensures that we are getting the updated document in the .then callback
+    { new: true }
+  )
+    .then(sunset => {
+      res.status(200).json(sunset);
     })
     .catch(err => {
       res.json(err);
@@ -108,6 +126,18 @@ router.post("/upload", uploader.single("img"), (req, res, next) => {
     return; 
   }
   res.json({secure_url: req.file.secure_url}); 
+});
+
+router.patch("/rating/:id", (req, res) => {
+  console.log(req.params.id);
+  console.log(req.body);
+  Sunset.findByIdAndUpdate(
+    req.params.id,
+    {
+      rating: parseFloat(req.body.rating.toFixed(1)),
+    },
+    { new: true }
+  ).then((place) => res.json(place));
 });
 
 
