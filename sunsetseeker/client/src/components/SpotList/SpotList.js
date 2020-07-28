@@ -2,10 +2,18 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import AddSpot from '../AddSpot/AddSpot';
-import ReactMapGL, { Marker } from "react-map-gl";
+import MapGL, { Marker, GeolocateControl} from "react-map-gl";
 import Pin from "../AddSpot/Pin";
 import "./SpotList.scss";
 
+
+import DeckGL, { GeoJsonLayer } from "deck.gl";
+import Geocoder from "react-map-gl-geocoder";
+
+
+
+ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 
 export default class SpotList extends Component {
@@ -16,15 +24,49 @@ export default class SpotList extends Component {
           latitude: 52.5200,
           longitude: 13.4050,
           zoom: 10,
-          width: 600,
-          height: 400,
+          width: 500,
+          height: 540,
           coordinates:"",
-         } 
+         },
+         searchResultLayer: null
       };
       
+
+      mapRef = React.createRef();
+
+
+      handleOnResult = event => {
+        this.setState({
+          searchResultLayer: new GeoJsonLayer({
+            id: "search-result",
+            data: event.result.geometry,
+            getFillColor: [255, 0, 0, 128],
+            getRadius: 1000,
+            pointRadiusMinPixels: 10,
+            pointRadiusMaxPixels: 10
+          })
+        })
+      }
+
+
+      geocoder = new MapboxGeocoder({
+        accessToken: process.env.REACT_APP_MAPBOX_TOKEN,
+       // mapboxgl: mapboxgl
+      });
+
+
+
       componentDidMount = () => {
         this.getData();
+
+
+        // map.addControl(
+        //   geocoder
+        //   );
+
+
       };
+
 
       getData = () => {
 
@@ -43,6 +85,13 @@ export default class SpotList extends Component {
       };
 
     render() {
+      const geolocateStyle ={
+        float: 'left',
+        margin: '20px',
+        padding: '5px'
+      };
+
+      const { viewport, searchResultLayer} = this.state;
 
     return(
         <div>
@@ -59,23 +108,29 @@ export default class SpotList extends Component {
                 })}
             
 
-            <ReactMapGL
+            <MapGL
+               ref={this.mapRef}
                 {...this.state.viewport}
                 mapboxApiAccessToken={ process.env.REACT_APP_MAPBOX_TOKEN }
                 mapStyle="mapbox://styles/paolagaray/ckd0bdux30v981ilig8zxzd8p"
                 onViewportChange={(viewport) => this.setState({viewport})}
             >
 
-          
-              {/* <Marker
-                longitude={this.state.viewport.longitude}
-                latitude={this.state.viewport.latitude}
-                offsetTop={-20}
-                offsetLeft={-10}
-  
-              >
-    <Pin size={20} />
-            </Marker> */}
+
+            <GeolocateControl
+                      style={geolocateStyle}
+                      positionOptions={{enableHighAccuracy: true}}
+                      trackUserLocation={true}
+                    />
+
+            <Geocoder 
+                            mapRef={this.mapRef}
+                            onResult={this.handleOnResult}
+                            onViewportChange={(viewport) => this.setState({viewport})}
+                            mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                            position='top-right'
+                          />
+
             
             {this.state.sunsets.map(sunset => 
                 <Marker 
@@ -92,15 +147,14 @@ export default class SpotList extends Component {
                    <Link to={`/spotdetails/${sunset._id}`}>
                    <img className="marker-btn-img" src = { sunset.img } alt="sunset icon" />
                   </Link>
-                  
                 </Marker>
             )} 
-
-            </ReactMapGL>
+            
+            </MapGL>
 
             <br/><br/>
             <button><Link to ={`/addSpot`}> Add a new Spot</Link></button>
-
+            <br/><br/>
 
         </div>
         );
