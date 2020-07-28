@@ -15,7 +15,7 @@ const Navbar = props => {
       {props.user && <div> Welcome, {props.user.username}!</div>}
               
               <Link to='/list'>Explore</Link>
-              <Link to ="/profile"><img src={profileIcon} style={{width: "30px"}}/></Link>
+              <Link to ="/profile"><img src={profileIcon} style={{width: "30px"}} alt="profile"/></Link>
               
       {props.user ? (
           <>
