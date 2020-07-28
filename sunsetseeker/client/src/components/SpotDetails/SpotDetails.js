@@ -4,17 +4,14 @@ import EditSpot from '../EditSpot/EditSpot';
 // import SpotList from '../SpotList/SpotList';
 import AddComment from '../AddComment/AddComment';
 import CommentList from '../CommentList/CommentList'; 
-
 import { Link } from 'react-router-dom';
 import StarRating from '../Rating/StarRating';  
+
 import Favorite from '../Favorites/Favorites';
 
 import ReactMapGL, { Marker } from 'react-map-gl';
-
 // import Rating from '../Rating/Rating';
-
 import Pin from "../AddSpot/Pin";
-
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import Favorites from "../Favorites/Favorites";
 
@@ -29,10 +26,10 @@ export default class SpotDetails extends Component {
         commentForm: false,
         rating: 0,
         editForm: false,
-        img: "",
+        img: [],
         viewport: {}, 
         latitude: "",
-        longitude: "",      
+        longitude: "",
         id: this.props.match.params.spotId,
         likes: 0
     };
@@ -44,7 +41,10 @@ export default class SpotDetails extends Component {
         })
     }   
 
-
+    deleteImage = () => {
+      console.log("this is executed")
+      fetch(`/server/list/deletepic/${this.state.id}`)
+    }
     // handleRating = (value) => {
     //   const newRating = (this.state.rating + value) / 2;
     //   axios
@@ -56,7 +56,34 @@ export default class SpotDetails extends Component {
     //   // console.log(value);
     // };
 
-    
+    onDrop=(picture)=> {
+      this.setState({
+        img:this.state.img.concat(picture)
+      }); 
+    }  
+
+    handleFile = element => {    
+      this.setState({
+        // uploadOn:true, 
+        uploadText:"It's uploading.."
+      }); 
+      console.log(element);
+      const uploadData=new FormData();
+      console.log("SHOW ME THIS"+element.target) 
+      uploadData.append("img", element.target.files[0]); 
+      axios
+      .post("/server/list/upload", uploadData)
+      .then(response =>{
+        this.setState({
+          img:[...this.state.img,response.data.secure_url], 
+          // uploadOn: false, 
+          uploadText: "Upload successful."
+        })
+      })
+      .catch(err=> console.log(err))
+    };
+
+
     toggleEditForm=()=> {
     //   const id = this.props.match.params.spotId;
       // console.log(id); 
@@ -87,7 +114,6 @@ export default class SpotDetails extends Component {
    
     handleSubmit = event => {
       event.preventDefault(); 
-      
       axios.put(`/server/list/${this.state.id}`, {
         title: this.state.title, 
         description: this.state.description, 
@@ -149,7 +175,7 @@ export default class SpotDetails extends Component {
 
   componentDidMount = () => {
       this.getData();
-      console.log("component did mount", this.state)
+      // console.log("component did mount", this.state)
   };
 
   exitEditing=()=> {
@@ -159,7 +185,8 @@ export default class SpotDetails extends Component {
   }; 
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
+    console.log("This state:", this.state)
     if (this.state.error) return <div>{this.state.error}</div>;
     if (!this.state.viewport) return <div>Loading..</div>;
     if (!this.state.spot) return (<></>) 
@@ -176,18 +203,32 @@ export default class SpotDetails extends Component {
     console.log(`this is the owner ${owner}`); 
     return (
     <div>
-      <Link to ={`/list`}>Go back to full list</Link>
-
-     
         <h1>{this.state.title}</h1>
         <p>{this.state.description}</p>
-        <img src={this.state.img} style={{width:"100px"}} alt="cannot be shown"/>
+        {/* <img src={this.state.img} style={{width:"100px"}} alt="pics"/> */}
+        {this.state.img.map(singleImg => {
+                    return (
+                    <div key={singleImg._id}><span> 
+                    <br/> 
+                    <img src={singleImg} style={{width:"100px"}} alt="pic"/></span>
+                    </div>
+                    );
+                })}
 
         {allowedToDelete && (
           <button variant='danger' onClick={this.deleteProject}> Delete Spot </button>
         )}
          {allowedToEdit && (
-          <button variant='danger' onClick={this.toggleEditForm}> Edit Spot </button>
+          //  <div>
+          //  <button varian='danger'>
+          //    <Link 
+          //    to={`/edit/${this.state.id}`} 
+          //    title={this.state.title}
+          //    style={{ textDecoration: 'none' }} 
+          //   > Edit Spot </Link>
+          //  </button>
+          // </div>
+        <button variant='danger' onClick={this.toggleEditForm}> Edit Spot </button>
         )}
 
 
@@ -207,7 +248,6 @@ export default class SpotDetails extends Component {
 
             { this.state.commentForm }
 
-            <h1>Comments: </h1>
 
             <h1> Rate this Spot </h1>
             <br/>
@@ -215,22 +255,28 @@ export default class SpotDetails extends Component {
 
             <StarRating spotId={this.state.id} rating={this.state.rating} />
 
-            <h2> Comments </h2>
+        <h2> Comments </h2>
+        <CommentList spotId={this.state.id} />
+        
+
 
             <CommentList spotId={this.state.id} />
 
             <Favorites spotId={this.state.id} likes={this.state.likes} />
+
         
         
         {this.state.editForm && (
           <div><br/>
             <button onClick={this.exitEditing}>Exit editing</button>
-          <EditSpot
-          {...this.state}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          />
-          
+            <EditSpot
+            {...this.state}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit} 
+            deleteImage={this.deleteImage}
+            handleFile={this.handleFile}
+          /> 
+
           </div>
         )}
 
@@ -254,8 +300,8 @@ export default class SpotDetails extends Component {
             </Marker>
         </ReactMapGL>
         
-        <h6>Latitud: {this.state.viewport.latitude} </h6>
-        <h6>Longitud: {this.state.viewport.longitude} </h6>
+        <h6>Latitude: {this.state.viewport.latitude} </h6>
+        <h6>Longitude: {this.state.viewport.longitude} </h6>
 
         </div>
 

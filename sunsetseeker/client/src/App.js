@@ -107,8 +107,9 @@ class App extends React.Component {
         />
 
         <Route 
-        exact path="/editSpot/:spotId"
+        exact path="/edit/:spotId"
         component={EditSpot}
+        // render={props => <EditSpot user={this.state.user} {...props}/>}
         />
 
         <Route

@@ -71,6 +71,7 @@ onDrop=(picture)=> {
       // uploadOn:true, 
       uploadText:"It's uploading.."
     }); 
+    console.log(element);
     const uploadData=new FormData();
     console.log("SHOW ME THIS"+element.target) 
     uploadData.append("img", element.target.files[0]); 
@@ -83,7 +84,7 @@ onDrop=(picture)=> {
     .post("/server/list/upload", uploadData)
     .then(response =>{
       this.setState({
-        file:response.data, 
+        file:[...this.state.file,response.data.secure_url], 
         // uploadOn: false, 
         uploadText: "Upload successful."
       })
@@ -170,8 +171,8 @@ onDrop=(picture)=> {
 
   render(){
     const { viewport, marker } = this.state;
+    // console.log(this.state.file)
     // console.log(viewport, marker)
-    console.log(this.file);  
     return(
       <div>
         <button><Link to ={`/list`}>Go back toverview</Link></button>
@@ -209,15 +210,24 @@ onDrop=(picture)=> {
 
               {this.state.uploadText}
               {this.state.uploadText=="It's uploading.." && (
-              <div class="bouncing-loader">
+              <div className="bouncing-loader">
               <div></div>
               <div></div>
               <div></div>
               </div>              
               )}
+              <br/>
+              <br/>
               {/* {this.state.file.map((f) => (
                 <div className="filepreview" onClick={this.removeFile.bind(this, f)}>{f.name}</div>
               ))} */}
+              {/* showing the pictures when uploaded: */}
+              
+              {this.state.file.length !==0 && this.state.file.map(pic=>{
+                return <>
+                <img src={pic} style={{width: "100px"}}></img>
+                </>
+              })}
           </div>
 
 

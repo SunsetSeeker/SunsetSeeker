@@ -83,7 +83,7 @@ export default class Login extends Component {
 
 
         <a href="http://localhost:5555/server/auth/google">
-              <button className="auth-btn sort-button">Sign up with Google</button>
+              <button className="auth-btn sort-button"> <img src={googleLogo} style={{width: "15px"}} alt="google"/>Sign up with Google</button>
             </a>
         {/* <form >
           <button><img src={googleLogo} style={{width:"15px"}} alt="google icon"/>  Continue with Google</button>

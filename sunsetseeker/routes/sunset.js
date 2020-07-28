@@ -8,7 +8,7 @@ router.post('/', (req, res) => {
   const title = req.body.title;
   const file = req.body.file; 
   const description = req.body.description;
-  const img=req.body.file.secure_url; 
+  const img=req.body.file; 
 
 
   const latitude= req.body.latitude; 
@@ -36,6 +36,7 @@ router.post('/', (req, res) => {
   })
     .then(sunset => {
       res.status(201).json(sunset);
+
     })
     .catch(err => {
       res.json(err);
@@ -139,7 +140,7 @@ router.delete('/:id', (req, res) => {
 });
 
 
-// for image upload 
+// for image upload
 router.post("/upload", uploader.single("img"), (req, res, next) => {
   // const img=req.body.file.secure_url; 
   if(!req.file) {
@@ -160,6 +161,7 @@ router.patch("/rating/:id", (req, res) => {
     { new: true }
   ).then((place) => res.json(place));
 });
+
 
 router.put("/favorites/:placeId", async (req, res) => {
   const userId = req.user._id;
@@ -226,6 +228,33 @@ router.get("/favorites", (req, res) => {
       res.json(error);
     });
 });
+
+=======
+// router.get('/edit/:id', (req, res) => {
+//   Sunset.findById(req.params.id)
+//     .then(sunset => {
+//       if (!sunset) {
+//         res.status(404).json(sunset);
+//       } else {
+//         res.status(200).json(sunset);
+//       }
+//     })
+//     .catch(err => {
+//       res.json(err);
+//     });
+// });
+
+
+router.delete('/deletepic/:id', (req, res) => {
+  //delete only one picture
+  const pic=req.params.singleImg; 
+  console.log("DELETE IT", pic)
+  Sunset.findByIdAndUpdate( 
+    {$pull: {name: pic}}
+    ).then(() =>
+    res.status(200).json({message: "ok"})); 
+    console.log("picture deleted.")
+})
 
 
 module.exports=router; 
