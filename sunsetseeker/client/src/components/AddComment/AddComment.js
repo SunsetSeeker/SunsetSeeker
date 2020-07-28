@@ -5,7 +5,7 @@ export default class AddComment extends Component {
 
     state = {
         //name: '',
-        commentfromuser: ''
+        commentfromuser: '',
       };
 
       handleChange = event => {
