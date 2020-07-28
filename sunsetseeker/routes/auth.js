@@ -71,8 +71,24 @@ router.delete('/logout', (req, res) => {
   res.json({ message: 'Successful logout' });
 })
 
+//google login: 
+router.get("/google", 
+  passport.authenticate("google", {
+    scope:[
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  })
+); 
+
+router.get("/google/callback", 
+  passport.authenticate("google", {
+    successRedirect: "http://localhost:3000/list", 
+    failureRedirect:"/login"
+  })
+); 
+
 router.get('/loggedin', (req, res) => {
   res.json(req.user);
 })
-
 module.exports = router;

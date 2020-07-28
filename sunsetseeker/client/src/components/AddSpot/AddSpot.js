@@ -1,14 +1,12 @@
 import * as React from "react";
+import './AddSpot.css';
 import { Component } from "react";
 import axios from 'axios'; 
-import FileInput from './FileInput'; 
+// import FileInput from './FileInput'; 
 import { Link } from 'react-router-dom';
-
 import Pin from "./Pin";
-
 import { render } from "react-dom";
 import MapGL, { Marker } from "react-map-gl";
-
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import ReactMapGL from "react-map-gl";
 
@@ -18,12 +16,13 @@ export default class AddSpot extends Component {
     title:"", 
     description:"",
     file:[], 
+    uploadText: "Choose a photo", 
     viewport: {
       latitude: 52,
       longitude: 13,
-      zoom: 15,
-      width: 800,
-      height: 600,
+      zoom: 10,
+      width: 600,
+      height: 400,
       coordinates:"",
     },
     marker: {
@@ -31,9 +30,7 @@ export default class AddSpot extends Component {
       longitude: 13.4069,
     },
     events: {},
-
   }; 
-
 
 
   componentDidMount = () => {
@@ -42,9 +39,9 @@ export default class AddSpot extends Component {
         viewport: {
           latitude: response.coords.latitude,
           longitude: response.coords.longitude,
-          width: 800,
-          height: 600,
-          zoom: 15,
+          width: 600,
+          height: 400,
+          zoom: 10,
         },
         marker: {
           latitude: response.coords.latitude,
@@ -69,7 +66,11 @@ onDrop=(picture)=> {
     });
   }; 
 
-  handleFile = element => {
+  handleFile = element => {    
+    this.setState({
+      // uploadOn:true, 
+      uploadText:"It's uploading.."
+    }); 
     const uploadData=new FormData();
     console.log("SHOW ME THIS"+element.target) 
     uploadData.append("img", element.target.files[0]); 
@@ -77,15 +78,14 @@ onDrop=(picture)=> {
     //   uploadData.append("img", element.target.file[x])
     // }
     console.log("THIS IS HAPPENING")
-    this.setState({
-      uploadOn:true 
-    }); 
+
     axios
     .post("/server/list/upload", uploadData)
     .then(response =>{
       this.setState({
         file:response.data, 
-        uploadOn: false
+        // uploadOn: false, 
+        uploadText: "Upload successful."
       })
     })
     .catch(err=> console.log(err))
@@ -163,12 +163,15 @@ onDrop=(picture)=> {
     });
   };
 
+  removeFile(f) {
+    this.setState({file:this.state.file.filter((x) => x!==f)}); 
+  }
 
 
   render(){
     const { viewport, marker } = this.state;
     // console.log(viewport, marker)
-    console.log(this.file)
+    console.log(this.file);  
     return(
       <div>
         <button><Link to ={`/list`}>Go back toverview</Link></button>
@@ -184,6 +187,7 @@ onDrop=(picture)=> {
             name="title"
             value={this.state.title}
             onChange={this.handleChange}
+            required
             />
         <label>Tell us more about the place:</label>
             <input
@@ -193,14 +197,36 @@ onDrop=(picture)=> {
             value={this.state.description}
             onChange={this.handleChange}
             />
-          <input 
-          type="file" 
-          id="photo"
-          name="photo"
-          onChange={this.handleFile}
-          />
+            <div className="fileInput">
+              <input 
+              type="file" 
+              id="photo"
+              name="photo"
+              data-cloudinary-field="img_id"
+              // onChange={this.handleFile}
+              onChange={(event)=> this.handleFile(event)}
+              />
+
+              {this.state.uploadText}
+              {this.state.uploadText=="It's uploading.." && (
+              <div class="bouncing-loader">
+              <div></div>
+              <div></div>
+              <div></div>
+              </div>              
+              )}
+              {/* {this.state.file.map((f) => (
+                <div className="filepreview" onClick={this.removeFile.bind(this, f)}>{f.name}</div>
+              ))} */}
+          </div>
+
+
           {/* <FileInput handleFile={this.handleFile} /> */}
-        <button type="submit" value="Add"> Add this spot</button>
+
+              {this.state.uploadText!=="It's uploading.." && (
+               <button type="submit" value="Add"> Add this spot</button> 
+              )}
+        
       </form>
       <br/><br/><br/>
 

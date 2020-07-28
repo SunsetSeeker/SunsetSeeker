@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { signup } from '../../services/auth';
 
+
 export default class Signup extends Component {
   state = {
     username: '',
@@ -35,10 +36,11 @@ export default class Signup extends Component {
     });
   };
 
+
   render() {
     return (
       <>
-        <h2>Signup</h2>
+        <h4>Signup with email</h4>
         <form onSubmit={this.handleSubmit}>
 
             <label htmlFor='username'>Username: </label>
@@ -49,7 +51,7 @@ export default class Signup extends Component {
               onChange={this.handleChange}
               id='username'
             />
-
+            <br/>
 
             <label htmlFor='password'>Password: </label>
             <input
@@ -63,9 +65,10 @@ export default class Signup extends Component {
           {this.state.message && (
             <p>{this.state.message}</p>
           )}
-          
+          <br/>
           <button type='submit'>Signup</button>
         </form>
+
       </>
     );
   }

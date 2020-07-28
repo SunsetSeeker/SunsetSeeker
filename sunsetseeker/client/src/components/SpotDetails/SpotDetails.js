@@ -1,17 +1,20 @@
 import React, {Component} from "react";
 import axios from "axios";
-// import { Button } from 'react-bootstrap';
 import EditSpot from '../EditSpot/EditSpot';
-import SpotList from '../SpotList/SpotList';
+// import SpotList from '../SpotList/SpotList';
 import AddComment from '../AddComment/AddComment';
 import CommentList from '../CommentList/CommentList'; 
+
 import { Link } from 'react-router-dom';
 import StarRating from '../Rating/StarRating';  
 
 import ReactMapGL, { Marker } from 'react-map-gl';
 
-import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
+// import Rating from '../Rating/Rating';
 
+import Pin from "../AddSpot/Pin";
+
+import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 
 
 
@@ -24,9 +27,11 @@ export default class SpotDetails extends Component {
         commentForm: false,
         rating: 0,
         editForm: false,
-        id: this.props.match.params.spotId,
         img: "",
-      
+        viewport: {}, 
+        latitude: "",
+        longitude: "",      
+        id: this.props.match.params.spotId,
     };
 
     deleteProject = () => {
@@ -34,8 +39,7 @@ export default class SpotDetails extends Component {
         .then(() => {
         this.props.history.push(`/list`);
         })
-
-    };   
+    }   
 
 
     // handleRating = (value) => {
@@ -57,6 +61,7 @@ export default class SpotDetails extends Component {
         editForm: !this.state.editForm
       })
     }; 
+
 
     handleChange = event => {
         const { name, value } = event.target;
@@ -106,17 +111,20 @@ export default class SpotDetails extends Component {
         axios
           .get(`/server/list/${this.state.id}`)
           .then(response => {
-            console.log(response.data);
+            console.log("this is the axios response", response.data);
             this.setState({
               spot: response.data, 
               title: response.data.title,
               description: response.data.description,
+              latitude: response.data.latitude,
+              longitude: response.data.longitude,
+              
               viewport: {
                 latitude: response.data.latitude,
                 longitude: response.data.longitude,
-                zoom: 15,
-                width: 800,
-                height: 600,
+                zoom: 10,
+                width: 600,
+                height: 400,
                 coordinates:"",
               },               
               rating: response.data.rating,
@@ -124,7 +132,6 @@ export default class SpotDetails extends Component {
               latitude: response.data.latitude,
               longitude: response.data.longitude,              
               
- 
             });
           })
           .catch(err => {
@@ -138,6 +145,7 @@ export default class SpotDetails extends Component {
 
   componentDidMount = () => {
       this.getData();
+      console.log("component did mount", this.state)
   };
 
   exitEditing=()=> {
@@ -197,7 +205,6 @@ export default class SpotDetails extends Component {
 
             <h1>Comments: </h1>
 
-
             <h1> Rate this Spot </h1>
             <br/>
            
@@ -226,11 +233,21 @@ export default class SpotDetails extends Component {
       <div> Map
 
         <ReactMapGL
-        {...this.state.viewport}
-        mapboxApiAccessToken={ process.env.REACT_APP_MAPBOX_TOKEN }
-        //mapStyle="mapbox://styles/paolagaray/ckd03bp5n0n8e1ip8h490lib1"
-        onViewportChange={(viewport) => this.setState({viewport})}
-        />
+            {...this.state.viewport}
+            mapboxApiAccessToken={ process.env.REACT_APP_MAPBOX_TOKEN }
+            mapStyle="mapbox://styles/paolagaray/ckd0bdux30v981ilig8zxzd8p"
+            onViewportChange={(viewport) => this.setState({viewport})}
+        > 
+            <Marker
+                    latitude = {this.state.latitude}
+                    longitude =  {this.state.longitude}
+                    offsetTop={-20}
+                    offsetLeft={-10}
+                  >
+                    <Pin size={20} />
+            </Marker>
+        </ReactMapGL>
+        
         <h6>Latitud: {this.state.viewport.latitude} </h6>
         <h6>Longitud: {this.state.viewport.longitude} </h6>
 

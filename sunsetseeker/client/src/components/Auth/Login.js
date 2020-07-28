@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { login } from '../../services/auth';
+import googleLogo from './google-logo.png'; 
 
 export default class Login extends Component {
   state = {
@@ -32,10 +33,17 @@ export default class Login extends Component {
         // successfully logged in
         // update the state for the parent component
         this.props.setUser(data);
-        this.props.history.push('/sunsets');
+        this.props.history.push('/list');
       }
     });
-  };
+  };7
+
+  logInGoogle=event => {
+    event.preventDefault(); 
+    console.log("this")
+  }
+
+
 
   render() {
     return (
@@ -68,6 +76,19 @@ export default class Login extends Component {
           
           <button type='submit'>Login</button>
         </form>
+        <br/>
+        <h4>You have a Google account?</h4>
+
+
+
+
+        <a href="http://localhost:5555/server/auth/google">
+              <button className="auth-btn sort-button">Sign up with Google</button>
+            </a>
+        {/* <form >
+          <button><img src={googleLogo} style={{width:"15px"}} alt="google icon"/>  Continue with Google</button>
+        </form> */}
+
       </>
     );
   }
