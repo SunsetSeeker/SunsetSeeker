@@ -41,9 +41,16 @@ export default class SpotDetails extends Component {
         })
     }   
 
-    deleteImage = () => {
-      console.log("this is executed")
-      fetch(`/server/list/deletepic/${this.state.id}`)
+    deleteImage = (singleImg) => {
+      let newImgArr = this.state.img.filter(img => img !== singleImg)
+      console.log("this is executed", this.state.img, singleImg, newImgArr)
+      axios.put(`/server/list/deletepic/${this.state.id}`, {picUrl: newImgArr})
+      .then((sunset)=>{
+        console.log("updated:", sunset)
+        this.setState({
+          img: newImgArr
+        })
+      })
     }
     // handleRating = (value) => {
     //   const newRating = (this.state.rating + value) / 2;
