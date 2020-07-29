@@ -87,7 +87,7 @@ export default class SpotList extends Component {
     render() {
       const geolocateStyle ={
         float: 'left',
-        margin: '20px',
+        margin: '15px',
         padding: '5px'
       };
 
