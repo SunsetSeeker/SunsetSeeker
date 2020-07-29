@@ -229,6 +229,7 @@ router.get("/favorites", (req, res) => {
     });
 });
 
+
 // router.get('/edit/:id', (req, res) => {
 //   Sunset.findById(req.params.id)
 //     .then(sunset => {
@@ -244,15 +245,17 @@ router.get("/favorites", (req, res) => {
 // });
 
 
-router.delete('/deletepic/:id', (req, res) => {
+router.put('/deletepic/:id', (req, res) => {
   //delete only one picture
-  const pic=req.params.singleImg; 
-  console.log("DELETE IT", pic)
-  Sunset.findByIdAndUpdate( 
-    {$pull: {name: pic}}
-    ).then(() =>
-    res.status(200).json({message: "ok"})); 
-    console.log("picture deleted.")
+  const picId=req.params.id; 
+  const picUrl=req.body.picUrl; 
+  console.log("DELETE IT", picId, picUrl)
+  Sunset.findByIdAndUpdate(picId,
+    {img: picUrl}, {new: true}
+    ).then((sunset) => {
+    console.log("picture deleted.", sunset)
+    res.status(200).json(sunset); 
+  }).catch(err => console.log(err))
 })
 
 

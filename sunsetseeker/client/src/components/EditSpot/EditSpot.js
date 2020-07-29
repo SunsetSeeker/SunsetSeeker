@@ -30,7 +30,7 @@ render() {
           {this.props.img.map(singleImg => {
                     return (
                       <div>
-                      <button variant='danger' onClick={this.props.deleteImage}>  
+                      <button type="button" variant='danger' onClick={() => this.props.deleteImage(singleImg)} >  
                       <img src={singleImg} style={{width:"100px"}} alt="pic"/><span><img src={trash} style={{width:"15px"}}/></span></button>
                       </div>);
                 })}
