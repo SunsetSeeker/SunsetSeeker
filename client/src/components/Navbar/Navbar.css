@@ -1,18 +1,51 @@
 nav {
-  text-align: center; 
-  /* display: flex; */
-  /* justify-content: center; */
+  /* text-align: center;   */
+  display: flex;
+  justify-content: flex-end;
   max-width: 500px;
-  height: 50px;
+  height: 70px;
   box-shadow: 0px -10px 20px #00000023;
   border-radius: 40px 40px 0px 0px;
   background-color: white;
-  /* border-top: 1.5px solid lightgray;
-  border-right: 1.5px solid lightgray;
-  border-left: 1.5px solid lightgray;  */
   bottom: 0;
   left: 0;
   right: 0;
   margin: 0 auto;
   z-index: 9999; 
 }; 
+button {
+  background-color: tomato;
+  color: white; 
+  border: none; 
+  padding: 10px; 
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;  
+  border-radius: 10px;
+}
+.part {
+  background-color: tomato;
+  color: white; 
+  border: none;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;  
+  padding: 10px;
+  border-radius: 10px;
+  margin-right: 10px; 
+  margin-top: 20px; 
+}
+.twoparts {
+  display: flex; 
+  margin-right: 10px; 
+}
+#login {
+  background-color: white; 
+  color: darkslategray; 
+  border: 1px solid darkslategray; 
+}
+#icon {
+  background-color: white; 
+}
+#welcome{
+  margin-right: 150px; 
+  margin-top: 23px;
+}

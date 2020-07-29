@@ -4,6 +4,20 @@ const uploader = require('../configs/cloudinary.js');
 const Sunset = require('../models/Sunset');
 const User = require('../models/User');
 
+router.get("/favorites", (req, res) => {
+  User.findById(req.user._id)
+    .populate("favorites")
+    .then((user) => {
+      if (!user) {
+        res.status(404).json(user);
+      }
+      res.json(user);
+    })
+    .catch((error) => {
+      res.json(error);
+    });
+});
+
 router.post('/', (req, res) => {
   const title = req.body.title;
   const file = req.body.file; 
@@ -55,19 +69,7 @@ router.get('/', (req,res) => {
   })
 }); 
 
-router.get('/:id', (req, res) => {
-  Sunset.findById(req.params.id)
-    .then(sunset => {
-      if (!sunset) {
-        res.status(404).json(sunset);
-      } else {
-        res.status(200).json(sunset);
-      }
-    })
-    .catch(err => {
-      res.json(err);
-    });
-});
+
 
 // For rating feature 
 router.put('/rating/:id', (req, res) => {
@@ -99,40 +101,6 @@ router.put('/rating/:id', (req, res) => {
   )
     .then(sunset => {
       res.status(200).json(sunset);
-    })
-    .catch(err => {
-      res.json(err);
-    });
-});
-
-
-router.put('/:id', (req, res) => {
-  const { title, description, img } = req.body;
-
-  Sunset.findByIdAndUpdate(
-    req.params.id,
-    { title, description, img },
-    // { new: true } ensures that we are getting the updated document in the .then callback
-    { new: true }
-  )
-    .then(sunset => {
-      res.status(200).json(sunset);
-    })
-    .catch(err => {
-      res.json(err);
-    });
-});
-
-router.delete('/:id', (req, res) => {
-  // delete the project
-  Sunset.findByIdAndDelete(req.params.id)
-    .then(sunset => {
-      // return Task.deleteMany({ _id: { $in: project.tasks } })
-      console.log("deleted");
-      res.status(200).json({ message: 'ok' });
-      // .then(() => {
-      //   res.status(200).json({ message: 'ok' });
-      // });
     })
     .catch(err => {
       res.json(err);
@@ -215,20 +183,6 @@ router.put("/favorites/:placeId", async (req, res) => {
   }
 });
 
-router.get("/favorites", (req, res) => {
-  User.findById(req.user._id)
-    .populate("favorites")
-    .then((user) => {
-      if (!user) {
-        res.status(404).json(user);
-      }
-      res.json(user);
-    })
-    .catch((error) => {
-      res.json(error);
-    });
-});
-
 
 // router.get('/edit/:id', (req, res) => {
 //   Sunset.findById(req.params.id)
@@ -257,6 +211,54 @@ router.put('/deletepic/:id', (req, res) => {
     res.status(200).json(sunset); 
   }).catch(err => console.log(err))
 })
+
+
+router.get('/:id', (req, res) => {
+  Sunset.findById(req.params.id)
+    .then(sunset => {
+      if (!sunset) {
+        res.status(404).json(sunset);
+      } else {
+        res.status(200).json(sunset);
+      }
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+
+router.put('/:id', (req, res) => {
+  const { title, description, img } = req.body;
+
+  Sunset.findByIdAndUpdate(
+    req.params.id,
+    { title, description, img },
+    // { new: true } ensures that we are getting the updated document in the .then callback
+    { new: true }
+  )
+    .then(sunset => {
+      res.status(200).json(sunset);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+
+router.delete('/:id', (req, res) => {
+  // delete the project
+  Sunset.findByIdAndDelete(req.params.id)
+    .then(sunset => {
+      // return Task.deleteMany({ _id: { $in: project.tasks } })
+      console.log("deleted");
+      res.status(200).json({ message: 'ok' });
+      // .then(() => {
+      //   res.status(200).json({ message: 'ok' });
+      // });
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
 
 
 module.exports=router; 

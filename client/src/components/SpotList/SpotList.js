@@ -128,7 +128,7 @@ export default class SpotList extends Component {
                             mapRef={this.mapRef}
                             onResult={this.handleOnResult}
                             onViewportChange={(viewport) => this.setState({viewport})}
-                            mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                            mapboxApiAccessToken={ process.env.REACT_APP_MAPBOX_TOKEN }
                             position='top-right'
                           />
 

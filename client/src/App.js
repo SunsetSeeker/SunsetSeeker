@@ -11,7 +11,7 @@ import SpotDetails from './components/SpotDetails/SpotDetails';
 import EditSpot from './components/EditSpot/EditSpot';
 import Map from './components/Map/Map';
 import Profile from './components/Profile/Profile'; 
-import Favorites from './components/Favorites/Favorites'; 
+
 // import CommentList from './components/CommentList/CommentList';
 
 
