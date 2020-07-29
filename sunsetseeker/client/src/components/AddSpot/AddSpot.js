@@ -1,5 +1,5 @@
 import * as React from "react";
-import './AddSpot.css';
+// import './AddSpot.css';
 import { Component } from "react";
 import axios from 'axios'; 
 // import FileInput from './FileInput'; 
