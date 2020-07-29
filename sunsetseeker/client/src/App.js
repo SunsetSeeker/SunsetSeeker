@@ -81,6 +81,12 @@ class App extends React.Component {
 
         <Route
           exact
+          path='/profile'
+          render={props => <Profile {...props} />}
+        />
+
+        <Route
+          exact
           path='/'
           render={props => <Home {...props} />}
         />
