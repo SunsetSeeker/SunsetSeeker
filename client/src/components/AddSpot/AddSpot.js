@@ -9,8 +9,6 @@ import { render } from "react-dom";
 import MapGL, { Marker } from "react-map-gl";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import ReactMapGL from "react-map-gl";
-
-
 export default class AddSpot extends Component {
   state={
     title:"", 
@@ -31,8 +29,6 @@ export default class AddSpot extends Component {
     },
     events: {},
   }; 
-
-
   componentDidMount = () => {
     navigator.geolocation.getCurrentPosition((response) => {
       this.setState({
@@ -50,14 +46,11 @@ export default class AddSpot extends Component {
       });
     });
   };   
-
 onDrop=(picture)=> {
     this.setState({
       file:this.state.file.concat(picture)
     }); 
   }   
-   
-
   handleChange = event => {
     const name=event.target.name; 
     const value=event.target.value; 
@@ -65,7 +58,6 @@ onDrop=(picture)=> {
       [name]: value
     });
   }; 
-
   handleFile = element => {    
     this.setState({
       // uploadOn:true, 
@@ -79,7 +71,6 @@ onDrop=(picture)=> {
     //   uploadData.append("img", element.target.file[x])
     // }
     console.log("THIS IS HAPPENING")
-
     axios
     .post("/server/list/upload", uploadData)
     .then(response =>{
@@ -91,8 +82,6 @@ onDrop=(picture)=> {
     })
     .catch(err=> console.log(err))
   };
-
-
   handleSubmit = event => {
     event.preventDefault(); 
     axios
@@ -105,11 +94,8 @@ onDrop=(picture)=> {
       })
     .then((res) => {
       console.log(res.data);
-      
       // this.props.getData();
-    
       this.props.history.push(`/spotdetails/${res.data._id}`);   
-
       //added this again in order to check file upload to Mongo
       this.setState({
         title:" ", 
@@ -129,13 +115,9 @@ onDrop=(picture)=> {
       console.log(err); 
     });
   };
-
-
   _updateViewport = (viewport) => {
     this.setState({ viewport });
   };
-
-
   _logDragEvent(name, event) {
     this.setState({
       events: {
@@ -144,16 +126,12 @@ onDrop=(picture)=> {
       },
     });
   }
-
-
   _onMarkerDragStart = (event) => {
     this._logDragEvent("onDragStart", event);
   };
-
   _onMarkerDrag = (event) => {
     this._logDragEvent("onDrag", event);
   };
-
   _onMarkerDragEnd = (event) => {
     this._logDragEvent("onDragEnd", event);
     this.setState({
@@ -163,12 +141,9 @@ onDrop=(picture)=> {
       },
     });
   };
-
   removeFile(f) {
     this.setState({file:this.state.file.filter((x) => x!==f)}); 
   }
-
-
   render(){
     const { viewport, marker } = this.state;
     // console.log(this.state.file)
@@ -207,7 +182,6 @@ onDrop=(picture)=> {
               // onChange={this.handleFile}
               onChange={(event)=> this.handleFile(event)}
               />
-
               {this.state.uploadText}
               {this.state.uploadText=="It's uploading.." && (
               <div className="bouncing-loader">
@@ -222,24 +196,18 @@ onDrop=(picture)=> {
                 <div className="filepreview" onClick={this.removeFile.bind(this, f)}>{f.name}</div>
               ))} */}
               {/* showing the pictures when uploaded: */}
-              
               {this.state.file.length !==0 && this.state.file.map(pic=>{
                 return <>
                 <img src={pic} style={{width: "100px"}}></img>
                 </>
               })}
           </div>
-
-
           {/* <FileInput handleFile={this.handleFile} /> */}
-
               {this.state.uploadText!=="It's uploading.." && (
                <button type="submit" value="Add"> Add this spot</button> 
               )}
-        
       </form>
       <br/><br/><br/>
-
       <div>
       <ReactMapGL
         {...this.state.viewport}
@@ -250,8 +218,6 @@ onDrop=(picture)=> {
         <span className="DragAndDrop MediumTextBold">
             Drag and drop the pin to spot a hidden place
         </span>
-          
-          
             <Marker
                 longitude={marker.longitude}
                 latitude={marker.latitude}
@@ -264,11 +230,8 @@ onDrop=(picture)=> {
               >
                 <Pin size={20} />
             </Marker>
-          
-
       </ReactMapGL>
       </div>
-
       </div>
     )
   }

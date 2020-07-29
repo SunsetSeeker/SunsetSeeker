@@ -6,17 +6,12 @@ import AddComment from '../AddComment/AddComment';
 import CommentList from '../CommentList/CommentList'; 
 import { Link } from 'react-router-dom';
 import StarRating from '../Rating/StarRating';  
-
 import Favorite from '../Favorites/Favorites';
-
 import ReactMapGL, { Marker } from 'react-map-gl';
 // import Rating from '../Rating/Rating';
 import Pin from "../AddSpot/Pin";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import Favorites from "../Favorites/Favorites";
-
-
-
 export default class SpotDetails extends Component {
     state= {
         spot: null,
@@ -33,14 +28,12 @@ export default class SpotDetails extends Component {
         id: this.props.match.params.spotId,
         likes: 0
     };
-
     deleteProject = () => {
       axios.delete(`/server/list/${this.state.id}`)
         .then(() => {
         this.props.history.push(`/list`);
         })
     }   
-
     deleteImage = (singleImg) => {
       let newImgArr = this.state.img.filter(img => img !== singleImg)
       console.log("this is executed", this.state.img, singleImg, newImgArr)
@@ -59,16 +52,13 @@ export default class SpotDetails extends Component {
     //       rating: newRating,
     //     })
     //     .then((res) => setRating(res.data.rating));
-  
     //   // console.log(value);
     // };
-
     onDrop=(picture)=> {
       this.setState({
         img:this.state.img.concat(picture)
       }); 
     }  
-
     handleFile = element => {    
       this.setState({
         // uploadOn:true, 
@@ -89,8 +79,6 @@ export default class SpotDetails extends Component {
       })
       .catch(err=> console.log(err))
     };
-
-
     toggleEditForm=()=> {
     //   const id = this.props.match.params.spotId;
       // console.log(id); 
@@ -98,27 +86,22 @@ export default class SpotDetails extends Component {
         editForm: !this.state.editForm
       })
     }; 
-
-
     handleChange = event => {
         const { name, value } = event.target;
         this.setState({
             [name] : value
         });
     };
-
     handleClick = () => {
         this.setState({
           rating: this.state.rating + 1,
         });
       };
-
    toggleCommentForm = () => {
         this.setState({
             commentForm: !this.state.commentForm
         })
       }; 
-   
     handleSubmit = event => {
       event.preventDefault(); 
       axios.put(`/server/list/${this.state.id}`, {
@@ -139,9 +122,7 @@ export default class SpotDetails extends Component {
       .catch(err => {
         console.log(err); 
       })
-  
     }
-
     getData = () => {
         // console.log(id, " here ");
         axios
@@ -155,7 +136,6 @@ export default class SpotDetails extends Component {
               latitude: response.data.latitude,
               longitude: response.data.longitude,
               likes: response.data.likes,
-              
               viewport: {
                 latitude: response.data.latitude,
                 longitude: response.data.longitude,
@@ -168,7 +148,6 @@ export default class SpotDetails extends Component {
               img: response.data.img, 
               latitude: response.data.latitude,
               longitude: response.data.longitude,              
-              
             });
           })
           .catch(err => {
@@ -179,26 +158,21 @@ export default class SpotDetails extends Component {
             // }
           });
       };
-
   componentDidMount = () => {
       this.getData();
       // console.log("component did mount", this.state)
   };
-
   exitEditing=()=> {
       this.setState({
       editForm: !this.state.editForm
     })
   }; 
-
   render() {
     // console.log(this.state);
     console.log("This state:", this.state)
     if (this.state.error) return <div>{this.state.error}</div>;
     if (!this.state.viewport) return <div>Loading..</div>;
     if (!this.state.spot) return (<></>) 
-
-
     let allowedToDelete = false;
     let allowedToEdit = false; 
     const user = this.props.user;
@@ -221,7 +195,6 @@ export default class SpotDetails extends Component {
                     </div>
                     );
                 })}
-
         {allowedToDelete && (
           <button variant='danger' onClick={this.deleteProject}> Delete Spot </button>
         )}
@@ -237,13 +210,9 @@ export default class SpotDetails extends Component {
           // </div>
         <button variant='danger' onClick={this.toggleEditForm}> Edit Spot </button>
         )}
-
-
-
         {/* <button onClick={this.toggleEditForm}> Edit Sunset Spot </button> */}
         {/* <button onClick={this.deleteProject}> Delete Spot </button> */}
         <button onClick={this.toggleCommentForm}> Add a Comment </button>
-            
             {this.state.commentForm && (
                 <AddComment
                     spotId = { this.state._id }
@@ -252,27 +221,14 @@ export default class SpotDetails extends Component {
                     {...this.props}
                 />
             )}
-
             { this.state.commentForm }
-
-
             <h1> Rate this Spot </h1>
             <br/>
-           
-
             <StarRating spotId={this.state.id} rating={this.state.rating} />
-
         <h2> Comments </h2>
         <CommentList spotId={this.state.id} />
-        
-
-
             <CommentList spotId={this.state.id} />
-
             <Favorites spotId={this.state.id} likes={this.state.likes} />
-
-        
-        
         {this.state.editForm && (
           <div><br/>
             <button onClick={this.exitEditing}>Exit editing</button>
@@ -283,14 +239,9 @@ export default class SpotDetails extends Component {
             deleteImage={this.deleteImage}
             handleFile={this.handleFile}
           /> 
-
           </div>
         )}
-
-
-
       <div> Map
-
         <ReactMapGL
             {...this.state.viewport}
             mapboxApiAccessToken={ process.env.REACT_APP_MAPBOX_TOKEN }
@@ -306,12 +257,9 @@ export default class SpotDetails extends Component {
                     <Pin size={20} />
             </Marker>
         </ReactMapGL>
-        
         <h6>Latitude: {this.state.viewport.latitude} </h6>
         <h6>Longitude: {this.state.viewport.longitude} </h6>
-
         </div>
-
       </div>
     );
   }

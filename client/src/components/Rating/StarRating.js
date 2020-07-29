@@ -2,20 +2,17 @@ import React, { Component } from "react";
 import { FaStar } from 'react-icons/fa';
 import axios from "axios";
 import "./StarRating.scss";
-
 export default class Favorite extends Component { 
     state={
         rating: 0,
         hover: 0
     }
-
     handleHover = (value) => {
         this.setState({
             hover: value
         })
     }
     getAverageRating = (arrRating) => arrRating.reduce((a,v) => a + v,0) / arrRating.length;
-
     handleRating = (event) => {
         console.log(event.target.value) 
     axios
@@ -24,19 +21,16 @@ export default class Favorite extends Component {
         })
         .then((res) => {
             console.log(res, "RESPONSE");
-            
         this.setState({
             rating: this.getAverageRating(res.data.rating)
         })
         });
     }
-
     componentDidMount() {
         this.setState({
             rating: this.getAverageRating(this.props.rating),
         })
     }
-
     render() {
 return (
       <div>
@@ -50,7 +44,6 @@ return (
                         name='rating' 
                         value={ratingValue}
                         onClick = {(event) => this.handleRating(event)}
-                        
                          />
                     <FaStar 
                         className='star' 
@@ -62,9 +55,7 @@ return (
                 </label> 
             );
         })}
-
       </div>
-
     );
     }
 };
