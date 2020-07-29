@@ -229,7 +229,6 @@ router.get("/favorites", (req, res) => {
     });
 });
 
-=======
 // router.get('/edit/:id', (req, res) => {
 //   Sunset.findById(req.params.id)
 //     .then(sunset => {

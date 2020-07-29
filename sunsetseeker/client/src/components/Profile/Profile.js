@@ -1,21 +1,33 @@
 import React, { Component } from 'react';
 import './Profile.css'
-export default class Login extends Component {
+import axios from "axios";
+import Favorite from '../Favorites/Favorites';
 
+
+export default class Profile extends Component {
+  state={
+    user: {}
+  }
+
+componentDidMount() {
+  axios.get("/server/list/favorites")
+  .then(response => this.setState({ user: response.data}))
+}
 
   render() {
+    if(!this.state.user.favorites) return <div> loading.. </div>
     return(
-      <div className="profilePage">
-      <h1>Profile page</h1>
-        <div className="upperPart">
-          <div>My spots</div>
-          <div>My favorites</div>
-          <div>Settings</div>
+        <div>
+            {this.state.user.favorites.map(place => {
+              return (
+                <div>
+                <p>{place.title}</p>
+                // <Favorite spotId={place._id} />
+                </div>
+              )
+            })}
         </div>
-        <div className="lowerPart">
-          
-        </div>
-      </div>
-    )
-  }
-}; 
+      )
+    }
+  }; 
+ 
