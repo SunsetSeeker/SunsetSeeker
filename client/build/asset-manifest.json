@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/static/css/main.feaeb404.chunk.css",
+    "main.js": "/static/js/main.b1c72dfb.chunk.js",
+    "main.js.map": "/static/js/main.b1c72dfb.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.09b85ec0.js",
+    "runtime-main.js.map": "/static/js/runtime-main.09b85ec0.js.map",
+    "static/css/2.c3bfca00.chunk.css": "/static/css/2.c3bfca00.chunk.css",
+    "static/js/2.dfca092f.chunk.js": "/static/js/2.dfca092f.chunk.js",
+    "static/js/2.dfca092f.chunk.js.map": "/static/js/2.dfca092f.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.3b0fe82d51bd15028f9e3fee36900a45.js": "/precache-manifest.3b0fe82d51bd15028f9e3fee36900a45.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.c3bfca00.chunk.css.map": "/static/css/2.c3bfca00.chunk.css.map",
+    "static/css/main.feaeb404.chunk.css.map": "/static/css/main.feaeb404.chunk.css.map",
+    "static/js/2.dfca092f.chunk.js.LICENSE.txt": "/static/js/2.dfca092f.chunk.js.LICENSE.txt",
+    "static/media/carousel1.jpg": "/static/media/carousel1.ec5a50b6.jpg",
+    "static/media/carousel2.jpg": "/static/media/carousel2.3397dcaf.jpg",
+    "static/media/carousel3.jpg": "/static/media/carousel3.b1208f7e.jpg",
+    "static/media/google-logo.png": "/static/media/google-logo.0b1e5c66.png",
+    "static/media/trash.png": "/static/media/trash.107c2a14.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.09b85ec0.js",
+    "static/css/2.c3bfca00.chunk.css",
+    "static/js/2.dfca092f.chunk.js",
+    "static/css/main.feaeb404.chunk.css",
+    "static/js/main.b1c72dfb.chunk.js"
+  ]
+}
