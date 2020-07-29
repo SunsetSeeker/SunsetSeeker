@@ -94,7 +94,7 @@ export default class SpotList extends Component {
       const { viewport, searchResultLayer} = this.state;
 
     return(
-        <div>
+        <div className="list">
             <h2> List of Views next to the location </h2>
                 {this.state.sunsets.map(sunset => {
                     return (

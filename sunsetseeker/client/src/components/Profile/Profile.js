@@ -4,6 +4,7 @@ import axios from "axios";
 import Favorite from '../Favorites/Favorites';
 
 
+
 export default class Profile extends Component {
   state={
     user: {}
