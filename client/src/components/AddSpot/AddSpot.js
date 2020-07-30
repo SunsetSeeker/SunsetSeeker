@@ -219,6 +219,7 @@ onDrop=(picture)=> {
             Drag and drop the pin to spot a hidden place
         </span>
             <Marker
+
                 longitude={marker.longitude}
                 latitude={marker.latitude}
                 offsetTop={-20}
