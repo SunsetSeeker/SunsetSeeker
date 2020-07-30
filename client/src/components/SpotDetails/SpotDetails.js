@@ -15,7 +15,6 @@ import Favorites from "../Favorites/Favorites";
 
 import './SpotDetails.scss';
 
-
 export default class SpotDetails extends Component {
     state= {
         spot: null,
@@ -49,15 +48,7 @@ export default class SpotDetails extends Component {
         })
       })
     }
-    // handleRating = (value) => {
-    //   const newRating = (this.state.rating + value) / 2;
-    //   axios
-    //     .put(`/rating/${props.match.params.id}`, {
-    //       rating: newRating,
-    //     })
-    //     .then((res) => setRating(res.data.rating));
-    //   // console.log(value);
-    // };
+   
     onDrop=(picture)=> {
       this.setState({
         img:this.state.img.concat(picture)
@@ -156,10 +147,6 @@ export default class SpotDetails extends Component {
           })
           .catch(err => {
             console.log(err.response);
-            // handle err.response depending on err.response.status
-            // if (err.response.status === 404) {
-            //   this.setState({ error: "Not found" });
-            // }
           });
       };
   componentDidMount = () => {
@@ -187,65 +174,31 @@ export default class SpotDetails extends Component {
     console.log(`this is the user ${user._id}`);  
     console.log(`this is the owner ${owner}`); 
     return (
-    <div className="details">
-        <h1>{this.state.title}</h1>
+
+    <div>
+      <div className="PlaceInfoTab">
+        <h1 >{this.state.title}</h1>
+
+        <div className="twoparts">
+          <StarRating spotId={this.state.id} rating={this.state.rating} />
+          <Favorites 
+            spotId={this.state.id} 
+            likes={this.state.likes} 
+            />
+        </div>
+
         <p>{this.state.description}</p>
         {/* <img src={this.state.img} style={{width:"100px"}} alt="pics"/> */}
         {this.state.img.map(singleImg => {
                     return (
                     <div key={singleImg._id}><span> 
                     <br/> 
-                    <img src={singleImg} style={{width:"100px"}} alt="pic"/></span>
+                    <img src={singleImg} className='Picture' alt="pic"/></span>
                     </div>
                     );
                 })}
-        {allowedToDelete && (
-          <button variant='danger' onClick={this.deleteProject}> Delete Spot </button>
-        )}
-         {allowedToEdit && (
-          //  <div>
-          //  <button varian='danger'>
-          //    <Link 
-          //    to={`/edit/${this.state.id}`} 
-          //    title={this.state.title}
-          //    style={{ textDecoration: 'none' }} 
-          //   > Edit Spot </Link>
-          //  </button>
-          // </div>
-        <button variant='danger' onClick={this.toggleEditForm}> Edit Spot </button>
-        )}
-        {/* <button onClick={this.toggleEditForm}> Edit Sunset Spot </button> */}
-        {/* <button onClick={this.deleteProject}> Delete Spot </button> */}
-        <button onClick={this.toggleCommentForm}> Add a Comment </button>
-            {this.state.commentForm && (
-                <AddComment
-                    spotId = { this.state._id }
-                    getData = { this.getData }
-                    hideForm = {() => this.setState({ commentForm: false })}
-                    {...this.props}
-                />
-            )}
-            { this.state.commentForm }
-            <h1> Rate this Spot </h1>
-            <br/>
-            <StarRating spotId={this.state.id} rating={this.state.rating} />
-        <h2> Comments </h2>
-        <CommentList spotId={this.state.id} />
-            <CommentList spotId={this.state.id} />
-            <Favorites spotId={this.state.id} likes={this.state.likes} />
-        {this.state.editForm && (
-          <div><br/>
-            <button onClick={this.exitEditing}>Exit editing</button>
-            <EditSpot
-            {...this.state}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit} 
-            deleteImage={this.deleteImage}
-            handleFile={this.handleFile}
-          /> 
-          </div>
-        )}
-      <div> Map
+        <br/>
+      <div>
         <ReactMapGL
             {...this.state.viewport}
             mapboxApiAccessToken={ process.env.REACT_APP_MAPBOX_TOKEN }
@@ -263,6 +216,58 @@ export default class SpotDetails extends Component {
         </ReactMapGL>
         {/* <h6>Latitude: {this.state.viewport.latitude} </h6>
         <h6>Longitude: {this.state.viewport.longitude} </h6> */}
+
+        <div className="twoparts">
+        {allowedToDelete && (
+          <button className='part' variant='danger' onClick={this.deleteProject}> Delete Spot </button>
+        )}
+         {allowedToEdit && (
+          //  <div>
+          //  <button varian='danger'>
+          //    <Link 
+          //    to={`/edit/${this.state.id}`} 
+          //    title={this.state.title}
+          //    style={{ textDecoration: 'none' }} 
+          //   > Edit Spot </Link>
+          //  </button>
+          // </div>
+        <button className='part' variant='danger' onClick={this.toggleEditForm}> Edit Spot </button>
+        )}
+        
+        {/* <button onClick={this.toggleEditForm}> Edit Sunset Spot </button> */}
+        {/* <button onClick={this.deleteProject}> Delete Spot </button> */}
+            
+        
+        <button className='part' onClick={this.toggleCommentForm}> Add a Comment </button>
+        
+        </div>
+
+        {this.state.commentForm && (
+          <AddComment
+              spotId = { this.state._id }
+              getData = { this.getData }
+              hideForm = {() => this.setState({ commentForm: false })}
+              {...this.props}
+          />
+      )}
+      { this.state.commentForm }
+
+      {this.state.editForm && (
+        <div><br/>
+          <button onClick={this.exitEditing}>Exit editing</button>
+          <EditSpot
+          {...this.state}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit} 
+          deleteImage={this.deleteImage}
+          handleFile={this.handleFile}
+        /> 
+        </div>
+      )}
+
+        <h2> Comments </h2>
+        <CommentList spotId={this.state.id} />
+        </div>
         </div>
       </div>
     );
