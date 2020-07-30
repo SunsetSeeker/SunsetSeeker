@@ -51,7 +51,7 @@ return (
                         size={30} 
                         onMouseEnter = {() => this.handleHover(ratingValue)}
                         onMouseLeave = {() => this.handleHover(null)}
-                    />;
+                    />
                 </label> 
             );
         })}
