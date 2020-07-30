@@ -38,7 +38,6 @@ export default class CommentList extends Component {
    render() {
      return (
        <div>
-        <h1> Test </h1> 
         {this.state.message && <p>{this.state.message}</p>}
         { this.state.comments.map(comment => {
           return (
