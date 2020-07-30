@@ -85,7 +85,7 @@ export default class Login extends Component {
           </form>
           <br />
           <h4>...or do you want to log in with your Google account?</h4>
-          <a href="http://localhost:5555/server/auth/google">
+          <a href="https://sun-catcher.herokuapp.com/server/auth/google">
             <button className="google-button">
               <img
                 className="google-logo"

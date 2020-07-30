@@ -21,10 +21,10 @@ export default class Home extends Component {
     return (
       <div className="home">
         <div className="home-text">
-          <h2 className="heading">You're a <span className="underline--magical">sunset lover?</span></h2>
+          <h2 className="heading">Are you a <span className="underline--magical">sunset lover?</span></h2>
           {/* <span>🌞</span> */}
           <p>
-            Use <b>sunsetseeker</b> to discover the best sun spots.
+            Use <b>suncatcher</b> to discover the best sun spots.
           </p>
           <br />
           <Link to={`/list`}>

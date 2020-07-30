@@ -2,6 +2,7 @@ import * as React from "react";
 import './AddSpot.css';
 import { Component } from "react";
 import axios from 'axios'; 
+import { FaPen } from 'react-icons/fa';
 // import FileInput from './FileInput'; 
 import { Link } from 'react-router-dom';
 import Pin from "./Pin";
@@ -9,6 +10,8 @@ import { render } from "react-dom";
 import MapGL, { Marker } from "react-map-gl";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import ReactMapGL from "react-map-gl";
+
+
 export default class AddSpot extends Component {
   state={
     title:"", 
@@ -216,14 +219,15 @@ onDrop=(picture)=> {
 
 
             <div className="fileInput">
-              
+              <label htmlFor="image" className="editButton">
+                <FaPen />
+              </label>
               <input 
-              
               type="file" 
               id="photo"
               name="photo"
               data-cloudinary-field="img_id"
-              
+              //style={{display: "none"}}
               // onChange={this.handleFile}
               onChange={(event)=> this.handleFile(event)}
               /><br/>

@@ -73,7 +73,7 @@ export default class Signup extends Component {
           </form>
 
           <h4>...or do you want to sign up with your Google account?</h4>
-          <a href="http://localhost:5555/server/auth/google">
+          <a href="https://sun-catcher.herokuapp.com/server/auth/google">
             <button className="google-button">
               <img
                 className="google-logo"

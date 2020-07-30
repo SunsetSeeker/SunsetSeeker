@@ -6,13 +6,10 @@ import SpotDetails from '../SpotDetails/SpotDetails';
 import StarRating from '../Rating/StarRating';
 
 
-
 export default class Profile extends Component {
   state={
     user: {}
   }
-
-  
 
 componentDidMount() {
   axios.get("/server/list/favorites")
@@ -23,7 +20,7 @@ componentDidMount() {
     console.log(this.state.user.favorites)
     if(!this.state.user.favorites) return <div> loading.. </div>
     return(
-        <div>
+        <div className="profile-page">
             {this.state.user.favorites.map(place => {
               return (
                 <div>
