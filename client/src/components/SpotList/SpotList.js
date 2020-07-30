@@ -54,13 +54,9 @@ export default class SpotList extends Component {
 
       componentDidMount = () => {
         this.getData();
-
-
         // map.addControl(
         //   geocoder
         //   );
-
-
       };
 
       getData = () => {
@@ -89,24 +85,25 @@ export default class SpotList extends Component {
 
     return(
         <div className="list">
-            <h4> List of Views next to the location </h4>
+            <h3> List of Views next to the location </h3>
                 {this.state.sunsets.map(sunset => {
                     return (
                         <div className="sunset-card" key={sunset._id}>
                             <table>
                                 <tr>
-                                {/* showing only the first image of the sunset */}
+
                                   <td>
-                                  <span><img className="sunset-list-img" src={ sunset.img[0] } style={{width:"100px"}} alt="pic"/></span>
+                                  <img className="sunset-list-img" src={ sunset.img[0] } style={{width:"100px"}} alt="pic"/>
                                   </td>
+                                  
                                   <td>
-                                  <Link           
-                                     to={`/spotdetails/${sunset._id}`} > <div className="sunset-title-list">{sunset.title}</div>
-                                  </Link>
+                                      <h4 className="sunset-title-list">{sunset.title}</h4>
                                   </td>
+                                  
                                   <td>
-                                  <Link  to={`/spotdetails/${sunset._id}`}> <button className="part" variant="danger">See details</button></Link>
+                                      <Link  to={`/spotdetails/${sunset._id}`}> <button id="sunset-list-btn" className="part" variant="danger">See details</button></Link>
                                   </td>
+
                                 </tr>
                             </table>
                         </div>
