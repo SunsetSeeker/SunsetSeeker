@@ -1,5 +1,5 @@
 import * as React from "react";
-// import './AddSpot.css';
+import './AddSpot.css';
 import { Component } from "react";
 import axios from 'axios'; 
 // import FileInput from './FileInput'; 
@@ -14,12 +14,12 @@ export default class AddSpot extends Component {
     title:"", 
     description:"",
     file:[], 
-    uploadText: "Choose a photo", 
+    uploadText: "Choose a photo:", 
     viewport: {
       latitude: 52,
       longitude: 13,
       zoom: 10,
-      width: 600,
+      width: 500,
       height: 400,
       coordinates:"",
     },
@@ -35,7 +35,7 @@ export default class AddSpot extends Component {
         viewport: {
           latitude: response.coords.latitude,
           longitude: response.coords.longitude,
-          width: 600,
+          width: 480,
           height: 400,
           zoom: 10,
         },
@@ -149,15 +149,17 @@ onDrop=(picture)=> {
     // console.log(this.state.file)
     // console.log(viewport, marker)
     return(
-      <div>
-        <button><Link to ={`/list`}>Go back toverview</Link></button>
-      <h2>Add a new sunset location:</h2>
+      <div className="addspot-container">
+       <Link to ={`/list`}> <button className="white-button">Go back to overview</button></Link>
+      <h4>Add a new sunset location:</h4>
       <form 
       onSubmit={this.handleSubmit}
       encType="multipart/form-data"
       >
-        <label>Name of the place:</label> 
+        <div className="input-container">
+        <label>Name of the place:</label> <br/>
             <input 
+            className="add-input"
             type="text" 
             id="title"
             name="title"
@@ -165,50 +167,20 @@ onDrop=(picture)=> {
             onChange={this.handleChange}
             required
             />
-        <label>Tell us more about the place:</label>
+        </div>
+        <div className="input-container">
+        <label>Tell us more about the place:</label><br/>
             <input
+            className="add-input"
             type="text"
             id="description"
             name="description"
             value={this.state.description}
             onChange={this.handleChange}
             />
-            <div className="fileInput">
-              <input 
-              type="file" 
-              id="photo"
-              name="photo"
-              data-cloudinary-field="img_id"
-              // onChange={this.handleFile}
-              onChange={(event)=> this.handleFile(event)}
-              />
-              {this.state.uploadText}
-              {this.state.uploadText=="It's uploading.." && (
-              <div className="bouncing-loader">
-              <div></div>
-              <div></div>
-              <div></div>
-              </div>              
-              )}
-              <br/>
-              <br/>
-              {/* {this.state.file.map((f) => (
-                <div className="filepreview" onClick={this.removeFile.bind(this, f)}>{f.name}</div>
-              ))} */}
-              {/* showing the pictures when uploaded: */}
-              {this.state.file.length !==0 && this.state.file.map(pic=>{
-                return <>
-                <img src={pic} style={{width: "100px"}}></img>
-                </>
-              })}
-          </div>
-          {/* <FileInput handleFile={this.handleFile} /> */}
-              {this.state.uploadText!=="It's uploading.." && (
-               <button type="submit" value="Add"> Add this spot</button> 
-              )}
-      </form>
-      <br/><br/><br/>
-      <div>
+        </div>
+        <div className="map">
+      <label>Choose a spot on the map:</label><br/>
       <ReactMapGL
         {...this.state.viewport}
         mapStyle="mapbox://styles/paolagaray/ckd0bdux30v981ilig8zxzd8p"
@@ -216,7 +188,7 @@ onDrop=(picture)=> {
         mapboxApiAccessToken={ process.env.REACT_APP_MAPBOX_TOKEN }
       >
         <span className="DragAndDrop MediumTextBold">
-            Drag and drop the pin to spot a hidden place
+            {/* Drag and drop the pin to spot a hidden place */}
         </span>
             <Marker
                 longitude={marker.longitude}
@@ -232,6 +204,49 @@ onDrop=(picture)=> {
             </Marker>
       </ReactMapGL>
       </div>
+        <div className="input-container">
+              {this.state.uploadText}
+              {this.state.uploadText=="It's uploading.." && (
+              <div className="bouncing-loader">
+              <div></div>
+              <div></div>
+              <div></div>
+              </div>              
+              )}
+
+
+            <div className="fileInput">
+              
+              <input 
+              
+              type="file" 
+              id="photo"
+              name="photo"
+              data-cloudinary-field="img_id"
+              
+              // onChange={this.handleFile}
+              onChange={(event)=> this.handleFile(event)}
+              /><br/>
+              </div>
+
+
+              {/* {this.state.file.map((f) => (
+                <div className="filepreview" onClick={this.removeFile.bind(this, f)}>{f.name}</div>
+              ))} */}
+              {/* showing the pictures when uploaded: */}
+              {this.state.file.length !==0 && this.state.file.map(pic=>{
+                return <>
+                <img src={pic} style={{width: "100px"}}></img>
+                </>
+              })}
+          </div>
+          {/* <FileInput handleFile={this.handleFile} /> */}
+              {this.state.uploadText!=="It's uploading.." && (
+               <button className="button" type="submit" value="Add"> Add this spot</button> 
+              )}
+      </form>
+      
+      
       </div>
     )
   }

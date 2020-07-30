@@ -54,7 +54,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App" >
-
+          <div>
         <Navbar 
           user={this.state.user} 
           setUser={this.setUser} 
@@ -144,7 +144,8 @@ class App extends React.Component {
         // component={SpotDetails}
         render={props => <SpotDetails user={this.state.user} {...props}/>}
         />
-      
+      </div>
+      <div className="footer">© IRONHACK WebDev Bootcamp Berlin 2020</div>
       </div>
     );
   }

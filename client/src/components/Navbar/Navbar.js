@@ -11,7 +11,8 @@ const handleLogout = props => {
 const Navbar = props => {
   return (
     <nav>
-      {props.user && <div id="welcome"> Welcome, <b>{props.user.username}</b>!</div>} 
+      <h1 id="suncatcher">Suncatcher</h1>
+      {/* {props.user && <div id="welcome"> Welcome, <b>{props.user.username}</b>!</div>}  */}
       {props.user ? (
           <>
             <div className="twoparts">
