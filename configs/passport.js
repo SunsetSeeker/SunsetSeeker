@@ -47,7 +47,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID, 
       clientSecret: process.env.GOOGLE_CLIENT_SECRET, 
-      callbackURL: "http://localhost:5555/server/auth/google/callback", 
+      callbackURL: "https://sun-catcher.herokuapp.com/server/auth/google/callback", 
       passReqToCallback: true, 
     }, 
     function (request, accessToken, refreshToken, profile, done) {

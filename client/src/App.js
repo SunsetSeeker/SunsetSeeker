@@ -68,7 +68,7 @@ class App extends React.Component {
         />
 
 
-        {/* <Route
+        {/* <Route hel
           exact
           path='/'
           // component={SpotList}
@@ -154,3 +154,5 @@ class App extends React.Component {
 
 }
 export default App;
+
+//Haciendo comentarios para hacer un push
