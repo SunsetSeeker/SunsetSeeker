@@ -9,17 +9,87 @@
   padding: 0;
   font-family: "Quicksand", sans-serif;
   color: darkslategray;
+  text-decoration: none;
 }
+
+.list button {
+  background-color: tomato;
+  color: white; 
+  border: none; 
+  padding: 8px; 
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;  
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+
+button {
+  background-color: tomato;
+  color: white; 
+  border: none; 
+  padding: 8px; 
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;  
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+
 .marker-btn {
   background: none;
   border: none;
   cursor: pointer;
 }
 .marker-btn-img {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px 20px;
 }
 .mapWrapper {
   width: 50vw;
   height: 50vh;
+}
+
+.sunset-card{
+  //margin: 10 auto;
+  //box-shadow: 4px 0px 4px 4px rgba(0,0,0,0.2);
+  align-items: center;
+  text-decoration: none;
+  padding: 10px 10px 20 20 ;
+  //border-radius: 5px; /* 5px rounded corners */
+}
+
+.sunset-card table{
+  align-items: center;
+}
+
+.sunset-card button {
+  background-color: tomato;
+  color: white; 
+  border: none; 
+  padding: 8px; 
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;  
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+#button-add-spot{
+  text-decoration: none;
+}
+
+.sunset-title-list{
+  text-decoration: none;
+}
+
+.sunset-list-img{
+  margin-left: 30px;
+  border-radius: 5px;
+  width: 100px;
+}
+
+#see-details{
+  align-items: flex-end;
+  align-self: flex-end;
 }

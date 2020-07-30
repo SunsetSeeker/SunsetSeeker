@@ -13,6 +13,7 @@ nav {
   margin: 0 auto;
   z-index: 9999; 
 }; 
+
 button {
   background-color: tomato;
   color: white; 
@@ -22,6 +23,7 @@ button {
   font-weight: 400;  
   border-radius: 10px;
 }
+
 .part {
   background-color: tomato;
   color: white; 
