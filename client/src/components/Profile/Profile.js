@@ -21,15 +21,16 @@ componentDidMount() {
     if(!this.state.user.favorites) return <div> loading.. </div>
     return(
         <div className="profile-page">
+          <h4>My favorite sun spots:</h4>
             {this.state.user.favorites.map(place => {
               return (
                 <div>
+                  
                   <p>{place.title}</p>
-                  <img className="images" src = { place.img } alt="sunset icon" />
+                  <img className="images" src = { place.img[0] } alt="sunset icon" />
                   <div className="itens">
                     <StarRating spotId={place.id} rating={place.rating} />
                   </div>
-     
                 </div>
               )
             })}
