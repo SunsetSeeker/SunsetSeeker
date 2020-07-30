@@ -62,7 +62,7 @@ button {
   font-weight: 400; 
 }
 #suncatcher { 
-  margin-right: 220px;
+  margin-right: 230px;
   /* font-family: "Lily Script One", cursive;  */
   /* font-family: 'Niconne', cursive;  */
   /* font-family: 'Allura', cursive; */
@@ -71,3 +71,7 @@ button {
   color: darkslategray;
 }
 
+/* #logout {
+  color: white; 
+  background-color: white; 
+} */
