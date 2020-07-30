@@ -46,6 +46,9 @@ button {
   background-color: white; 
 }
 #welcome{
-  margin-right: 150px; 
-  margin-top: 23px;
+  margin-right: 135px; 
+  margin-top: 27px;
+  font-family: "Quicksand", sans-serif;
+  color: darkslategray; 
+  font-weight: 400; 
 }

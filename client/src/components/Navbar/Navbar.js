@@ -11,12 +11,12 @@ const handleLogout = props => {
 const Navbar = props => {
   return (
     <nav>
-      {props.user && <div id="welcome"> Welcome, <b>{props.user.username}</b>!  </div>} 
+      {props.user && <div id="welcome"> Welcome, <b>{props.user.username}</b>!</div>} 
       {props.user ? (
           <>
             <div className="twoparts">
               <div><Link to='/list'><button className="part" variant="danger">Explore</button></Link></div>   
-              <div><Link to ="/profile"><img className="part" id="icon" src={profileIcon} style={{width: "18px"}} alt="profile"/></Link></div>
+              <div><Link to ="/profile"><img className="part" id="icon" src={profileIcon} style={{width: "25px"}} alt="profile"/></Link></div>
               <div><Link to='/' onClick={() => handleLogout(props)}><button className="part" variant="danger">Logout</button></Link></div>
             </div>
           </>

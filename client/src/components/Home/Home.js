@@ -1,26 +1,30 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
-import Slideshow from "./Slideshow";
-import slide1 from "./carousel1.jpg";
-import slide2 from "./carousel2.jpg";
-import slide3 from "./carousel3.jpg";
-import Carousel from "./CarouselSlideshow";
 import CarouselSlideshow from "./CarouselSlideshow";
-const s = {
-  container: "screenW screenH dGray col",
-  main: "flex8 white",
-};
-const slides = [slide1, slide2, slide3];
+
+// import Slideshow from "./Slideshow";
+// import slide1 from "./carousel1.jpg";
+// import slide2 from "./carousel2.jpg";
+// import slide3 from "./carousel3.jpg";
+// import slide4 from './carousel4.jpg'; 
+// import Carousel from "./CarouselSlideshow";
+// const s = {
+//   container: "screenW screenH dGray col",
+//   main: "flex8 white",
+// };
+// const slides = [slide1, slide2, slide3, slide4];
+
+
 export default class Home extends Component {
   render() {
     return (
       <div className="home">
         <div className="home-text">
-          <h3>Youre a sunset lover?</h3>
+          <h2 className="heading">You're a <span className="underline--magical">sunset lover?</span></h2>
           {/* <span>🌞</span> */}
           <p>
-            Use <b>sunsetseeker</b> to discover the best suns spots.
+            Use <b>sunsetseeker</b> to discover the best sun spots.
           </p>
           <br />
           <Link to={`/list`}>
