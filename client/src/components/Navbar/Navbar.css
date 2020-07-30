@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Lily+Script+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Niconne&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&family=Pacifico&display=swap');
+
+
 nav {
   /* text-align: center;   */
   display: flex;
@@ -52,3 +59,13 @@ button {
   color: darkslategray; 
   font-weight: 400; 
 }
+#suncatcher { 
+  margin-right: 220px;
+  /* font-family: "Lily Script One", cursive;  */
+  /* font-family: 'Niconne', cursive;  */
+  /* font-family: 'Allura', cursive; */
+  /* font-family: 'Pacifico', cursive; */
+  font-family: 'Lobster Two', cursive;
+  color: darkslategray;
+}
+

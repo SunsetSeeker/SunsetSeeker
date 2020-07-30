@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { login } from "../../services/auth";
-// import googleLogo from './google-logo.png';
+import googleLogo from './google-logo.png';
 import "./Auth.css";
 import { Link } from "react-router-dom";
 
@@ -84,6 +84,18 @@ export default class Login extends Component {
             </button>
           </form>
           <br />
+          <h4>...or do you want to log in with your Google account?</h4>
+          <a href="http://localhost:5555/server/auth/google">
+            <button className="google-button">
+              <img
+                className="google-logo"
+                src={googleLogo}
+                style={{ width: "15px" }}
+                alt="google"
+              />
+              Continue with Google
+            </button>
+          </a>
           {/* <h4>You have a Google account?</h4>
         <a href="http://localhost:5555/server/auth/google">
               <button className="auth-btn sort-button"> <img src={googleLogo} style={{width: "15px"}} alt="google"/>Sign up with Google</button>
