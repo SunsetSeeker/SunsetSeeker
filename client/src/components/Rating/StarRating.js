@@ -48,7 +48,7 @@ return (
                     <FaStar 
                         className='star' 
                         color={ratingValue <= (this.state.hover || this.state.rating) ? "#ffc107" : "#e4e5e9"} 
-                        size={60} 
+                        size={30} 
                         onMouseEnter = {() => this.handleHover(ratingValue)}
                         onMouseLeave = {() => this.handleHover(null)}
                     />;

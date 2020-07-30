@@ -12,6 +12,10 @@ import ReactMapGL, { Marker } from 'react-map-gl';
 import Pin from "../AddSpot/Pin";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import Favorites from "../Favorites/Favorites";
+
+import './SpotDetails.scss';
+
+
 export default class SpotDetails extends Component {
     state= {
         spot: null,
@@ -140,8 +144,8 @@ export default class SpotDetails extends Component {
                 latitude: response.data.latitude,
                 longitude: response.data.longitude,
                 zoom: 10,
-                width: 600,
-                height: 400,
+                width: 500,
+                height: 540,
                 coordinates:"",
               },               
               rating: response.data.rating,
@@ -183,7 +187,7 @@ export default class SpotDetails extends Component {
     console.log(`this is the user ${user._id}`);  
     console.log(`this is the owner ${owner}`); 
     return (
-    <div>
+    <div className="details">
         <h1>{this.state.title}</h1>
         <p>{this.state.description}</p>
         {/* <img src={this.state.img} style={{width:"100px"}} alt="pics"/> */}
@@ -257,8 +261,8 @@ export default class SpotDetails extends Component {
                     <Pin size={20} />
             </Marker>
         </ReactMapGL>
-        <h6>Latitude: {this.state.viewport.latitude} </h6>
-        <h6>Longitude: {this.state.viewport.longitude} </h6>
+        {/* <h6>Latitude: {this.state.viewport.latitude} </h6>
+        <h6>Longitude: {this.state.viewport.longitude} </h6> */}
         </div>
       </div>
     );
