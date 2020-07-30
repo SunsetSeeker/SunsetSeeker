@@ -71,7 +71,8 @@ button {
   color: darkslategray;
 }
 
-/* #logout {
-  color: white; 
+#logout {
+  color: darkslategrey; 
+  border: 1px solid darkslategrey; 
   background-color: white; 
-} */
+}
