@@ -1,9 +1,64 @@
-.container {
+@import url("https://fonts.googleapis.com/css?family=Quicksand");
+
+.auth-container {
   margin: 0 auto;
+  text-align: center;
   max-width: 500px;
   max-height: 640px;
   height: 100vh;
-  background-color: red; 
+  background-color: white;
   border-radius: 0px 0px 40px 40px;
+  padding: 0;
+  font-family: "Quicksand", sans-serif;
+  color: darkslategray;
+  box-shadow: 0px 10px 20px #00000023;
+}
 
+.auth-text {
+  padding-top: 50px;
+}
+
+.auth-input {
+  width: 200px;
+  height: 20px; 
+  padding: 0;
+  margin-top: 5px;
+  box-sizing: border-box;
+  border: 0.1px solid darkslategray; 
+  border-radius: 5px;
+  text-align: center; 
+  color: darkslategray; 
+}
+
+.auth-button {
+  background-color: tomato;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.google-button {
+  background-color: white;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 50px; 
+  color: darkslategray;
+  border: solid darkslategray; 
+  font-family: "Quicksand", sans-serif;
+  border: 1px solid darkslategray;
+}
+
+.google-logo {
+  margin-right: 10px;
+}
+
+
+.already {
+  font-size: 14px; 
 }

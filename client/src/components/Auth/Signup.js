@@ -1,75 +1,94 @@
-import React, { Component } from 'react';
-import { signup } from '../../services/auth';
-
+import React, { Component } from "react";
+import { signup } from "../../services/auth";
+import { Link } from 'react-router-dom';
+import "./Auth.css";
+import googleLogo from "./google-logo.png";
 
 export default class Signup extends Component {
   state = {
-    username: '',
-    password: '',
-    message: ''
+    username: "",
+    password: "",
+    message: "",
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { name, value } = event.target;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     const { username, password } = this.state;
 
-    signup(username, password).then(data => {
+    signup(username, password).then((data) => {
       if (data.message) {
         this.setState({
           message: data.message,
-          username: '',
-          password: ''
+          username: "",
+          password: "",
         });
       } else {
         this.props.setUser(data);
-        this.props.history.push('/');
+        this.props.history.push("/");
       }
     });
   };
 
-
   render() {
     return (
-      <>
-        <h4>Signup with email</h4>
-        <form onSubmit={this.handleSubmit}>
-
-            <label htmlFor='username'>Username: </label>
+      <div className="auth-container">
+        <div className="auth-text">
+          <h4>Signup with username</h4>
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="username">Choose a username: </label><br/>
             <input
-              type='text'
-              name='username'
+              className="auth-input"
+              type="text"
+              name="username"
               value={this.state.username}
               onChange={this.handleChange}
-              id='username'
+              id="username"
             />
-            <br/>
+            <br />
 
-            <label htmlFor='password'>Password: </label>
+            <label htmlFor="password">Set a password: </label><br/>
             <input
-              type='password'
-              name='password'
+              className="auth-input"
+              type="password"
+              name="password"
               value={this.state.password}
               onChange={this.handleChange}
-              id='password'
+              id="password"
             />
 
-          {this.state.message && (
-            <p>{this.state.message}</p>
-          )}
-          <br/>
-          <button type='submit'>Signup</button>
-        </form>
+            {this.state.message && <p>{this.state.message}</p>}
+            <br />
+            <button className="auth-button" type="submit">
+              Create account
+            </button>
+          </form>
 
-      </>
+          <h4>...or do you want to sign up with your Google account?</h4>
+          <a href="http://localhost:5555/server/auth/google">
+            <button className="google-button">
+              <img
+                className="google-logo"
+                src={googleLogo}
+                style={{ width: "15px" }}
+                alt="google"
+              />
+              Continue with Google
+            </button>
+          </a>
+          
+          <p className="already"> Do you already have an account? <Link to='/login'>Login</Link></p>
+          
+        </div>
+      </div>
     );
   }
 }
