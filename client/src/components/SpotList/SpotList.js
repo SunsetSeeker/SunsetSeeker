@@ -25,15 +25,13 @@ export default class SpotList extends Component {
           longitude: 13.4050,
           zoom: 10,
           width: 500,
-          height: 540,
+          height: 300,
           coordinates:"",
          },
          searchResultLayer: null
       };
-      
 
       mapRef = React.createRef();
-
 
       handleOnResult = event => {
         this.setState({
@@ -48,12 +46,10 @@ export default class SpotList extends Component {
         })
       }
 
-
       geocoder = new MapboxGeocoder({
         accessToken: process.env.REACT_APP_MAPBOX_TOKEN,
        // mapboxgl: mapboxgl
       });
-
 
 
       componentDidMount = () => {
@@ -67,9 +63,7 @@ export default class SpotList extends Component {
 
       };
 
-
       getData = () => {
-
         axios
           .get('server/list')
           .then(response => {
@@ -95,19 +89,31 @@ export default class SpotList extends Component {
 
     return(
         <div className="list">
-            <h2> List of Views next to the location </h2>
+            <h4> List of Views next to the location </h4>
                 {this.state.sunsets.map(sunset => {
                     return (
-                        <div key={sunset._id}>
-                            <h3>
-                                <Link to={`/spotdetails/${sunset._id}`} > {sunset.title}</Link>
+                        <div className="sunset-card" key={sunset._id}>
+                            <table>
+                                <tr>
                                 {/* showing only the first image of the sunset */}
-                                <span> <br/> <img src={sunset.img[0]} style={{width:"100px"}} alt="pic"/></span>
-                            </h3>
+                                  <td>
+                                  <span><img className="sunset-list-img" src={ sunset.img[0] } style={{width:"100px"}} alt="pic"/></span>
+                                  </td>
+                                  <td>
+                                  <Link           
+                                     to={`/spotdetails/${sunset._id}`} > <div className="sunset-title-list">{sunset.title}</div>
+                                  </Link>
+                                  </td>
+                                  <td>
+                                  <Link  to={`/spotdetails/${sunset._id}`}> <button className="part" variant="danger">See details</button></Link>
+                                  </td>
+                                </tr>
+                            </table>
                         </div>
                     );
                 })}
-            
+
+                <br/>
 
             <MapGL
                ref={this.mapRef}
@@ -117,7 +123,6 @@ export default class SpotList extends Component {
                 onViewportChange={(viewport) => this.setState({viewport})}
             >
 
-
             <GeolocateControl
                       style={geolocateStyle}
                       positionOptions={{enableHighAccuracy: true}}
@@ -125,13 +130,12 @@ export default class SpotList extends Component {
                     />
 
             <Geocoder 
-                            mapRef={this.mapRef}
-                            onResult={this.handleOnResult}
-                            onViewportChange={(viewport) => this.setState({viewport})}
-                            mapboxApiAccessToken={ process.env.REACT_APP_MAPBOX_TOKEN }
-                            position='top-right'
-                          />
-
+                      mapRef={this.mapRef}
+                      onResult={this.handleOnResult}
+                      onViewportChange={(viewport) => this.setState({viewport})}
+                      mapboxApiAccessToken={ process.env.REACT_APP_MAPBOX_TOKEN }
+                      position='top-right'
+              />
             
             {this.state.sunsets.map(sunset => 
                 <Marker 
@@ -146,15 +150,13 @@ export default class SpotList extends Component {
                    </button> */}
                    
                    <Link to={`/spotdetails/${sunset._id}`}>
-                   <img className="marker-btn-img" src = { sunset.img } alt="sunset icon" />
+                   <img className="marker-btn-img" src = { sunset.img[0] } alt="sunset icon" />
                   </Link>
                 </Marker>
             )} 
             
             </MapGL>
-
-            <br/><br/>
-            <button><Link to ={`/addSpot`}> Add a new Spot</Link></button>
+                <Link  to ='/addSpot'> <button className="part" variant="danger">Add a new sunset</button></Link>
             <br/><br/>
 
         </div>
