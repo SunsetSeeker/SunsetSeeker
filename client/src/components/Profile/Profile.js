@@ -29,7 +29,10 @@ componentDidMount() {
                 <div>
                   <p>{place.title}</p>
                   <img className="images" src = { place.img } alt="sunset icon" />
-                  <StarRating spotId={place.id} rating={place.rating} />
+                  <div className="itens">
+                    <StarRating spotId={place.id} rating={place.rating} />
+                  </div>
+     
                 </div>
               )
             })}
