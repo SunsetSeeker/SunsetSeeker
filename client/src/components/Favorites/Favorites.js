@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import { FaStar } from 'react-icons/fa';
 import axios from "axios";
 import "./Favorites.scss";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import {
-//   faHeart,
-//   faStar,
-//   faArrowLeft,
-// } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHeart,
+  faStar,
+  faArrowLeft,
+} from "@fortawesome/free-solid-svg-icons";
 
-const heart = <img src="sunsetseeker/client/public/burn-1294425_640.png"/>;
+const heart = <FontAwesomeIcon icon = { faHeart } />;
+
+
 
 export default class Favorites extends Component { 
     state={
@@ -34,10 +36,12 @@ export default class Favorites extends Component {
         <div>
           <button
             onClick={ this.handleFavorites }
+            className= {this.state.favorite === true ? "FavoriteActive" : "Favorite"} 
             >
-         {this.state.likes} Likes
+        { heart } 
         </button>
         </div>
           );
     }
 };
+

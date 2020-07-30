@@ -1,6 +1,17 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand");
+
 .App {
   /* text-align: center; */
-  background-color:antiquewhite;
+  /* background-color:antiquewhite; */
+  background-image: url("./background-app.jpg");
+  background-size: cover;
+}
+
+.footer {
+  color: white; 
+  text-align: center; 
+  font-family: "Quicksand", sans-serif;
+  font-size: 10px; 
 }
 
 /* .App-logo {
