@@ -68,7 +68,7 @@ class App extends React.Component {
         />
 
 
-        {/* <Route
+        {/* <Route hel
           exact
           path='/'
           // component={SpotList}
