@@ -150,7 +150,7 @@ export default class SpotList extends Component {
                    </button> */}
                    
                    <Link to={`/spotdetails/${sunset._id}`}>
-                   <img className="marker-btn-img" src = { sunset.img } alt="sunset icon" />
+                   <img className="marker-btn-img" src = { sunset.img[0] } alt="sunset icon" />
                   </Link>
                 </Marker>
             )} 
