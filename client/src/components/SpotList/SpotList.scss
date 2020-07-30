@@ -52,12 +52,13 @@ button {
 }
 
 .sunset-card{
-  //margin: 10 auto;
-  //box-shadow: 4px 0px 4px 4px rgba(0,0,0,0.2);
+  margin: 10 auto;
+  box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.2);
   align-items: center;
   text-decoration: none;
   padding: 10px 10px 20 20 ;
-  //border-radius: 5px; /* 5px rounded corners */
+  border-radius: 1px; /* 5px rounded corners */
+
 }
 
 .sunset-card table{
@@ -84,12 +85,16 @@ button {
 }
 
 .sunset-list-img{
-  margin-left: 30px;
+  margin-left: 60px;
   border-radius: 5px;
   width: 100px;
 }
 
 #see-details{
   align-items: flex-end;
+  align-self: flex-end;
+}
+
+#sunset-list-btn{
   align-self: flex-end;
 }
