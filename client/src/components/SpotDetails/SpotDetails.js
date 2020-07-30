@@ -135,8 +135,8 @@ export default class SpotDetails extends Component {
                 latitude: response.data.latitude,
                 longitude: response.data.longitude,
                 zoom: 10,
-                width: 500,
-                height: 540,
+                width: 400,
+                height: 300,
                 coordinates:"",
               },               
               rating: response.data.rating,
@@ -177,7 +177,11 @@ export default class SpotDetails extends Component {
 
     <div>
       <div className="PlaceInfoTab">
-        <h1 >{this.state.title}</h1>
+        <div className='detail-nav'>
+          <h1 >{this.state.title}</h1>
+          <Link  to ='/list'> <button className="part" variant="danger" > Back to Spots </button></Link>
+        </div>
+        
 
         <div className="twoparts">
           <StarRating spotId={this.state.id} rating={this.state.rating} />
@@ -199,7 +203,8 @@ export default class SpotDetails extends Component {
                 })}
         <br/>
       <div>
-        <ReactMapGL
+        <div className='map-name'>
+          <ReactMapGL
             {...this.state.viewport}
             mapboxApiAccessToken={ process.env.REACT_APP_MAPBOX_TOKEN }
             mapStyle="mapbox://styles/paolagaray/ckd0bdux30v981ilig8zxzd8p"
@@ -214,6 +219,7 @@ export default class SpotDetails extends Component {
                     <Pin size={20} />
             </Marker>
         </ReactMapGL>
+        </div>
         {/* <h6>Latitude: {this.state.viewport.latitude} </h6>
         <h6>Longitude: {this.state.viewport.longitude} </h6> */}
 

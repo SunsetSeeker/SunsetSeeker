@@ -52,6 +52,14 @@
     justify-content: space-between;
   }
 
+  .detail-nav {
+    display: flex;
+    justify-content: space-between;
+  }
+  .map-name {
+    display: flex;
+    justify-content: center;
+  }
 
   .Picture {
         font-family: "Quicksand", sans-serif;
@@ -67,40 +75,7 @@
         transition: 0.6s ease-in-out;
         }
       
-    //     .Marker:hover {
-    //       transform: scale(1.5);
-    //       transition: 0.6s ease-in-out;
-    //       box-shadow: 3px 3px 10px #00000048;
-    //     }
-      
-    //     .Marker {
-    //       animation: 0.9s ease-in showMe;
-    //     }
-      
-    //     @keyframes showMe {
-    //       from {
-    //         opacity: 0;
-    //         transform: scale(3);
-    //       }
-    //       to {
-    //         opacity: 1;
-    //         transform: scale(1);
-    //       }
-    //     }
-      
-    //     @keyframes slide-up {
-    //       from {
-    //         margin-top: 62px;
-    //         height: 0%;
-    //         opacity: -1;
-    //       }
-      
-    //       to {
-    //         margin-top: 0px;
-    //         height: 62%;
-    //         opacity: 1;
-    //       }
-    //     }
+   
       
         .PlaceInfoTab {
             max-width: 500px;
@@ -124,41 +99,7 @@
             overflow: scroll;
         }
       
-    //     .MediumTextBold {
-    //       margin-top: 30px;
-    //     }
-      
-    //     .Rating i {
-    //       margin-right: 5px;
-    //     }
-      
-    //     .PlaceInfoTab img {
-    //       height: 188px;
-    //       border-radius: 15px;
-    //       margin: 10px 0;
-    //       padding: 0;
-    //       object-fit: cover;
-    //       object-position: center;
-    //       z-index: 9999;
-    //     }
-      
-    //     .Rating {
-    //       color: #d1d1cc;
-    //       font-size: 1.5rem;
-    //       transition: 0.6s ease-in-out;
-    //     }
-      
-    //     .RatingActive {
-    //       color: #ffad14;
-    //       font-size: 1.5rem;
-    //       filter: drop-shadow(0px 0px 8px #f8a2029a);
-    //       transition: 0.6s ease-in-out;
-    //     }
-      
-    //     .NumRating {
-    //       margin-left: 10px;
-    //       font-size: 1.1rem;
-    //     }
+    
       
         .Favorite {
           font-size: 1.9rem;
@@ -174,65 +115,6 @@
           outline: none;
         }
       
-    //     div.PlaceInfoTab > div > div {
-    //       display: flex;
-    //       align-items: center;
-    //     }
-      
-    //     // .Favorite:hover {
-    //     //   filter: drop-shadow(0px 0px 5px #ff3f4f91);
-    //     //   color: #ff3f4f;
-    //     //   transition: 0.6s ease-in-out;
-    //     // }
-      
-    //     button {
-    //       border: none;
-    //       outline: none;
-    //       background-color: Transparent;
-    //       background-repeat: no-repeat;
-    //       border: none;
-    //       cursor: pointer;
-    //       outline: none;
-    //     }
-      
-    //     p {
-    //       margin: 5px 0;
-    //     }
-      
-    //     .PlaceInfoTab > div {
-    //       margin: 10px 0;
-    //       display: flex;
-    //       align-items: center;
-    //       justify-content: space-between;
-    //     }
-      
-    //     .Map {
-    //       animation: 0.1s ease-in 0s 1 slide-up;
-    //     }
-      
-    //     //hide mapboxlogo
-    //     div.mapboxgl-ctrl-bottom-left,
-    //     div.mapboxgl-ctrl-bottom-right {
-    //       display: none;
-    //     }
-      
-    //     .Photo {
-    //       margin: 10px 0 110px 0;
-    //     }
-      
-    //     .BackBtn {
-    //       font-size: 2rem;
-    //       background-color: white;
-    //       margin-left: 20px;
-    //       margin-top: 10px;
-    //       width: 45px;
-    //       height: 45px;
-    //       border-radius: 50px;
-    //       box-shadow: 3px 3px 15px #00000048;
-    //       display: flex;
-    //       justify-content: center;
-    //       align-items: center;
-    //       opacity: 0.85;
-    //       z-index: 5;
-    //     }
-    //   }
+    
+    
+    
