@@ -11,14 +11,14 @@ const handleLogout = props => {
 const Navbar = props => {
   return (
     <nav>
-      <h1 id="suncatcher">Suncatcher</h1>
+      <Link to='/list' style={{textDecoration:"none"}}><h1 id="suncatcher">Suncatcher</h1></Link>
       {/* {props.user && <div id="welcome"> Welcome, <b>{props.user.username}</b>!</div>}  */}
       {props.user ? (
           <>
             <div className="twoparts">
               {/* <div><Link to='/list'><button className="part" variant="danger">Explore</button></Link></div>  */}
-              <div><Link to='/' onClick={() => handleLogout(props)}><button className="part" id="logout" variant="danger">Logout </button></Link></div>  
               <div><Link to ="/profile"><img className="part" id="icon" src={profileIcon} style={{width: "25px"}} alt="profile"/></Link></div>
+              <div><Link to='/' onClick={() => handleLogout(props)}><button className="part" id="logout" variant="danger">Logout </button></Link></div>  
             </div>
           </>
       ) : (

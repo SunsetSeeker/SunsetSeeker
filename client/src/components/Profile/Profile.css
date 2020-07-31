@@ -1,5 +1,5 @@
 .images { 
-    width: 100px; 
+    width: 200px; 
     /* max-width: 200px;
     max-height: 200px; 
     height: 100vh;
@@ -9,11 +9,12 @@
     justify-content: flex-end; */
 }
 
-/* .itens {
-    text-align: center; 
-    display: flex;
+.itens {
+    /* width: 5px;  */
+    /* text-align: center; 
+    display: flex; */
     
-}  */
+} 
 
 
 .profile-page {
