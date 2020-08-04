@@ -32,6 +32,12 @@ nav .whiteButton {
   font-weight: 400;
   border-radius: 10px;
   margin-left: 5px;
+  transition: 0.5s; 
+}
+.whiteButton:hover {
+  background-color: tomato; 
+  color: white; 
+  border: 0.1px solid tomato;
 }
 
 nav .otherButton {

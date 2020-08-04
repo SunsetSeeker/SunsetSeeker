@@ -80,9 +80,10 @@ export default class SpotList extends Component {
     return (
       <div className="list">
         <h4 className="heading">
-          <br />
-          Explore the best sun spots:
+          <br /> <span className="underline--magical">
+          Explore the best sun spots:</span>
         </h4>
+ 
         {this.state.sunsets.map((sunset) => {
           return (
             <div className="sunset-card" key={sunset._id}>
@@ -118,8 +119,14 @@ export default class SpotList extends Component {
             </div>
           );
         })}
-
-        <br />
+        <Link to="/addSpot">
+          {" "}
+          <button className="addNew-button" variant="danger">
+            Add a new location
+          </button>
+          <br />
+        </Link>
+        
 
         <MapGL
           ref={this.mapRef}
@@ -164,12 +171,7 @@ export default class SpotList extends Component {
             </Marker>
           ))}
         </MapGL>
-        <Link to="/addSpot">
-          {" "}
-          <button className="part" variant="danger">
-            Add a new location
-          </button>
-        </Link>
+        
         <br />
         <br />
       </div>

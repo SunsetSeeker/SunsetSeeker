@@ -12,6 +12,7 @@
   font-family: "Quicksand", sans-serif;
   color: darkslategray;
   box-shadow: 0px 10px 20px #00000023;
+  animation: 0.2s ease-in 0s 1 fadeIn;
 }
 
 .auth-text {
@@ -61,4 +62,9 @@
 
 .already {
   font-size: 14px; 
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
