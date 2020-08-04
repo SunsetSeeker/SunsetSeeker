@@ -19,7 +19,7 @@ export default class SpotList extends Component {
       latitude: 52.52,
       longitude: 13.405,
       zoom: 10,
-      width: 500,
+      width: 480,
       height: 300,
       coordinates: "",
     },
@@ -167,7 +167,7 @@ export default class SpotList extends Component {
         <Link to="/addSpot">
           {" "}
           <button className="part" variant="danger">
-            Add a new sunset
+            Add a new location
           </button>
         </Link>
         <br />

@@ -37,7 +37,7 @@ export default class AddSpot extends Component {
         viewport: {
           latitude: response.coords.latitude,
           longitude: response.coords.longitude,
-          width: 600,
+          width: 480,
           height: 400,
           zoom: 10,
         },
