@@ -29,4 +29,10 @@
   color: darkslategray;
   box-shadow: 0px 10px 20px #00000023;
   overflow-y: scroll;
+  animation: 0.2s ease-in 0s 1 fadeIn;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }

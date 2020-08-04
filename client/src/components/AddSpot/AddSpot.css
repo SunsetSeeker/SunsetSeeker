@@ -37,6 +37,7 @@
   color: darkslategray;
   box-shadow: 0px 10px 20px #00000023;
   overflow-y: scroll;
+  animation: 0.2s ease-in 0s 1 fadeIn;
 }
 
 .button {
@@ -62,6 +63,14 @@
   border-radius: 10px;
   margin: 20px;
   border: 0.1px solid darkslategray; 
+  /* hover effect:  */
+  transition: 0.5s;
+}
+
+.white-button:hover {
+  background-color: tomato; 
+  color: white; 
+  border: 0.1px solid tomato;
 }
 
 .add-input{
@@ -97,6 +106,9 @@
   font-family: "Quicksand", sans-serif;
   font-weight: 400;
   width: 300px; 
+}
 
-  
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }

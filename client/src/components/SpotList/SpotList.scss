@@ -11,6 +11,7 @@
   color: darkslategray;
   text-decoration: none;
   overflow-y: scroll;
+  animation: 0.2s ease-in 0s 1 fadeIn;
 }
 
 .list button {
@@ -50,6 +51,8 @@
 .sunset-card {
   display: flex; 
   justify-content: space-evenly;
+  box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.2);
+  margin: 5px; 
 }
 
 
@@ -61,6 +64,16 @@
 
 .sunset-list-img {
   border-radius: 5px;
+}
+
+.addNew-button {
+  margin-bottom: 15px; 
+  margin-top: 10px; 
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
 
 // .sunset-card{
