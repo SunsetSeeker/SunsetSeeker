@@ -1,40 +1,28 @@
 .list {
   margin: 0 auto;
-  text-align: center; 
+  text-align: center;
   max-width: 500px;
-  // max-height: 640px; 
+  max-height: 625px;
   height: 100vh;
-  background-color: white; 
-  border-radius: 0px 0px 40px 40px;  
+  background-color: white;
+  border-radius: 0px 0px 40px 40px;
   padding: 0;
   font-family: "Quicksand", sans-serif;
   color: darkslategray;
   text-decoration: none;
+  overflow-y: scroll;
 }
 
 .list button {
   background-color: tomato;
-  color: white; 
-  border: none; 
-  padding: 8px; 
+  color: white;
+  border: none;
+  padding: 8px;
   font-family: "Quicksand", sans-serif;
-  font-weight: 400;  
+  font-weight: 400;
   border-radius: 10px;
   text-decoration: none;
 }
-
-
-button {
-  background-color: tomato;
-  color: white; 
-  border: none; 
-  padding: 8px; 
-  font-family: "Quicksand", sans-serif;
-  font-weight: 400;  
-  border-radius: 10px;
-  text-decoration: none;
-}
-
 
 .marker-btn {
   background: none;
@@ -51,58 +39,81 @@ button {
   height: 50vh;
 }
 
-
-.sunset-card{
-  margin: 10 auto;
-  box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.2);
-  align-items: center;
-  text-decoration: none;
-  padding: 10px 10px 20 20 ;
-  border-radius: 1px; /* 5px rounded corners */
-
-}
-
-.sunset-card table{
-  align-items: center;
-}
-
-.sunset-card button {
-  background-color: tomato;
-  color: white; 
-  border: none; 
-  padding: 8px; 
-  font-family: "Quicksand", sans-serif;
-  font-weight: 400;  
-  border-radius: 10px;
+#button-add-spot {
   text-decoration: none;
 }
-
-#button-add-spot{
-  text-decoration: none;
-}
-
-.sunset-title-list{
-  text-decoration: none;
-}
-
-.sunset-list-img{
-  margin-left: 60px;
-  border-radius: 5px;
-  width: 100px;
-}
-
-#see-details{
-  align-items: flex-end;
-  align-self: flex-end;
-}
-
-#sunset-list-btn{
-  // display: flex; 
-  align-self: flex-end;
-  margin-left: 30px; 
-}
-
 
 .heading {
-  margin-top: 0px; 
+  margin-top: 0px;
 }
+
+.sunset-card {
+  display: flex; 
+  justify-content: space-evenly;
+}
+
+
+.sunset-title-list {
+  width: 200px; 
+  display: flex;
+  margin-left: 10px; 
+}
+
+.sunset-list-img {
+  border-radius: 5px;
+}
+
+// .sunset-card{
+//   margin: 10 auto;
+//   box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.2);
+//   align-items: center;
+//   text-decoration: none;
+//   padding: 10px 10px 20 20 ;
+//   border-radius: 1px; /* 5px rounded corners */
+// }
+
+// .sunset-list-img{
+//   margin-left: 60px;
+//   border-radius: 5px;
+//   width: 100px;
+// }
+
+// #see-details{
+//   align-items: flex-end;
+//   align-self: flex-end;
+// }
+
+// #sunset-list-btn{
+//   align-self: flex-end;
+//   margin-left: 30px;
+// }
+
+// .sunset-card table{
+//   align-items: center;
+// }
+
+// .sunset-card button {
+//   background-color: tomato;
+//   color: white;
+//   border: none;
+//   padding: 8px;
+//   font-family: "Quicksand", sans-serif;
+//   font-weight: 400;
+//   border-radius: 10px;
+//   text-decoration: none;
+// }
+
+// button {
+//   background-color: tomato;
+//   color: white;
+//   border: none;
+//   padding: 8px;
+//   font-family: "Quicksand", sans-serif;
+//   font-weight: 400;
+//   border-radius: 10px;
+//   text-decoration: none;
+// }
+
+// .sunset-title-list{
+//   text-decoration: none;
+// }
